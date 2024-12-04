@@ -1,0 +1,285 @@
+// === Include your styles here === //
+
+@use "@/style/helpers/mixin";
+
+// === / Include your styles here === //
+
+
+// === Styles === //
+
+.search__wrap {
+  opacity: 1;
+
+  .search__container {
+    width: 100%;
+    border-radius: 8px;
+    background: #202125;
+    border: 4px solid #232428;
+    padding: 44px 60px;
+
+    .search__wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+
+      .search__box {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        grid-gap: clamp(1rem, 3vw, 1rem);
+      }
+
+      .search__box-bottom {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+
+      .search {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        position: relative;
+
+        .search__label {
+          @include mixin.font-style(400, null, 130, #959595);
+          @include mixin.font-size(16, 14);
+        }
+
+        .search__input {
+          height: 56px;
+          border-radius: 8px;
+          padding: 18px 24px;
+          cursor: text;
+          caret-color: #FFFFFF;
+          box-shadow: inset 0 4px 16px -8px rgba(125, 140, 161, 0.04);
+          background: #181817;
+          transition: all .4s ease;
+          @include mixin.font-style(500, 16, 130, #FFFFFF);
+
+          &:focus {
+            box-shadow: 0 0 15px 0 rgba(255, 255, 255, 0.1);
+            background: #131314;
+          }
+
+          &::placeholder {
+            @include mixin.font-style(500, 14, 130, #565656)
+          }
+        }
+
+        .search__input-hidden {
+          width: 100%;
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          opacity: 0;
+          pointer-events: none;
+        }
+
+        .country__input {
+          padding: 18px 24px 18px 90px;
+          @include mixin.font-style(null, null, null, #565656);
+        }
+
+        .country__input-focused {
+          box-shadow: 0 0 15px 0 rgba(255, 255, 255, 0.1);
+          background: #131314;
+          @include mixin.font-style(null, null, null, #FFFFFF);
+        }
+
+        .country__input-open {
+          border-radius: 8px 8px 0px 0px;
+          box-shadow: 2px 4px 16px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        .select__country {
+          position: absolute;
+          left: 24px;
+          bottom: 18px;
+          display: flex;
+          cursor: pointer;
+          gap: 3px;
+
+          .select__btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            svg {
+              transition: all .4s ease;
+              transform: rotate(90deg);
+            }
+          }
+
+          .select__btn-open {
+            .svg {
+              transform: rotate(-90deg);
+            }
+          }
+
+          .select__flag {
+            width: 28px;
+            height: 20px;
+          }
+
+          .country__list {
+            height: fit-content;
+            max-height: 224px;
+            background: #181817;
+            overflow-y: auto;
+            overscroll-behavior: none;
+            position: absolute;
+            top: calc(100% + 18px);
+            left: -23px;
+            z-index: 10;
+            border-radius: 0 0 8px 8px;
+
+            .country__list-item {
+              height: 56px;
+              box-shadow: inset 0 4px 16px -8px rgba(125, 140, 161, 0.04);
+              background: #202125;
+              display: flex;
+              align-items: center;
+              gap: 10px;
+              cursor: pointer;
+              margin-bottom: 2px;
+              padding: 0px 24px;
+              @include mixin.font-style(500, 16, 130, #FFFFFF);
+
+              &:last-child {
+               margin-bottom: 0px;
+              }
+            }
+
+            &::-webkit-scrollbar {
+              background: #232428;
+              border-radius: 0px 0px 8px 0px;
+              width: 9px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+              background: #2750F2;
+              border-radius: 5px;
+            }
+
+            &:root {
+              scrollbar-width: thin;
+              scrollbar-color: #2750F2 #232428;
+            }
+          }
+
+          .country__list-open {
+            box-shadow: 2px 4px 16px 0 rgba(0, 0, 0, 0.5);
+          }
+        }
+      }
+
+      .search__btn {
+        width: 100%;
+        height: 58px;
+        margin: 24px 0px 0px 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 8px;
+        background: #2750f2;
+        transition: all .4s ease;
+        @include mixin.font-style(600, 20, 130, #FFFFFF);
+        letter-spacing: -0.01em;
+
+        &:hover {
+          background: #03f;
+        }
+      }
+    }
+  }
+
+  .table__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    min-height: 400px;
+
+    .table__warning {
+      display: flex;
+      align-items: center;
+      gap: 21px;
+      background: #202125;
+      border: 4px solid #232428;
+      border-radius: 8px;
+      padding: 30px;
+      @include mixin.font-style(500, null, 140, #FFFFFF);
+      @include mixin.font-size(16, 14);
+      text-align: center;
+    }
+
+    .table__loader {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      inset: 0;
+      background: #131314;
+
+      .loader {
+        width: 160px;
+      }
+    }
+  }
+}
+
+@media (width < 800px) {
+  .search__wrap {
+    .search__container {
+      .search__wrapper {
+        .search__box-bottom {
+
+        }
+      }
+    }
+  }
+}
+
+@media (width < 850px) {
+  .search__wrap {
+    .search__container {
+      .search__wrapper {
+        .search__box-bottom {
+          grid-template-columns: repeat(1, 1fr);
+        }
+      }
+    }
+  }
+}
+
+@media (width < 1024px) {
+  .search__wrap {
+    .search__container {
+      padding: 24px;
+
+      .search__wrapper {
+        gap: 16px;
+
+        .search {
+          .search__label {
+            //@include mixin.font-style(null, 14, null, null)
+          }
+        }
+
+        .search__box-bottom {
+          gap: 16px;
+        }
+      }
+    }
+
+    .table__container {
+      .table__warning {
+        //@include mixin.font-style(null, 14, null, null);
+        padding: 18px;
+      }
+    }
+  }
+}
+
+// === / Styles === //
