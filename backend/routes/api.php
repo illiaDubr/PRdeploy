@@ -10,17 +10,12 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 
 //Route::post('/search-players', [\App\Http\Controllers\PlayerController::class, 'search']);
 
-// Route::controller(\App\Http\Controllers\PlayerController::class)
-//     ->prefix('search-players')
-//     ->group(function (){
-//         Route::post('', [\App\Http\Controllers\PlayerController::class, 'search']);
-// });
-
 Route::controller(\App\Http\Controllers\PlayerController::class)
-    ->prefix('api/search-players')
-    ->group(function () {
-        Route::post('', 'search');
-    });
+    ->prefix('search-players')
+    ->group(function (){
+        Route::post('', [\App\Http\Controllers\PlayerController::class, 'search']);
+});
+
 
 
 Route::controller(\App\Http\Controllers\UserController::class)->group(function (){
