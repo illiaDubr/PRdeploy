@@ -21,4 +21,4 @@ RUN composer install
 RUN chown -R www-data:www-data /var/www
 
 # Expose порт для веб-сервера
-EXPOSE 9000
+EXPOSE 8000
