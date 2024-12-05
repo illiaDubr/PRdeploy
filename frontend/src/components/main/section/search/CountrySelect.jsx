@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import "flag-icons/css/flag-icons.min.css";
 import IconSvg from "@/components/main/section/components/IconSvg";
 
-const CountrySelect = () => {
+const CountrySelect = ({ onPhoneNumberChange }) => {
     const countryCodes = [
         { name: "Украина", code: "UA", dialCode: "+380" },
         { name: "Россия", code: "RU", dialCode: "+7" },
@@ -45,11 +45,13 @@ const CountrySelect = () => {
     const handleInputChange = (e) => {
         const input = e.target.value.replace(/\D/g, "").slice(0, 9);
         setPhoneNumber(input);
+        onPhoneNumberChange(`${selectedCountry.dialCode}${input}`);
     };
 
     const handleCountryChange = (country) => {
         setSelectedCountry(country);
         setPhoneNumber("");
+        onPhoneNumberChange(country.dialCode);
         setIsDropdownOpen(false);
         inputRef.current.focus();
     };
@@ -58,7 +60,7 @@ const CountrySelect = () => {
 
     return (
         <div className="search">
-            <label htmlFor="phone-number" className="search__label">
+            <label htmlFor="phoneNumber" className="search__label">
                 Номер телефона
             </label>
 
@@ -104,6 +106,7 @@ const CountrySelect = () => {
                     className="search__input-hidden"
                     ref={inputRef}
                     type="text"
+                    id="phoneNumber"
                     value={phoneNumber}
                     onFocus={() => setIsInputFocused(true)}
                     onBlur={() => setIsInputFocused(false)}

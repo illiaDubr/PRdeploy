@@ -1,12 +1,11 @@
-import React from "react";
+import React, { useState, useCallback } from "react";
 import axios from "axios";
+import CountrySelect from "@/components/main/section/search/CountrySelect";
 
-const SearchForm = () => {
-
-
-    const [isSubmitting, setIsSubmitting] = React.useState(false);
-
-    const [formData, setFormData] = React.useState({
+const SearchForm = ({ setSearchResults, setIsLoading }) => {
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [errors, setErrors] = useState({});
+    const [formData, setFormData] = useState({
         surname: "",
         name: "",
         middle_name: "",
@@ -17,85 +16,96 @@ const SearchForm = () => {
     });
 
     const fields = [
-        {label: "Фамилия", name: "surname", type: "text", placeholder: "Введите фамилию"},
-        {label: "Имя", name: "name", type: "text", placeholder: "Введите имя"},
-        {label: "Отчество", name: "middle_name", type: "text", placeholder: "Введите отчество"},
-        {label: "Discord", name: "discord", type: "text", placeholder: "Введите ник игрока"},
-        {label: "Почта", name: "Email", type: "email", placeholder: "Введите почту игрока"},
-        {label: "Ник в руме", name: "nickname", type: "text", placeholder: "Введите ник игрока"},
-        {label: "номер", name: "phonenumber", type: "text", placeholder: "Введите ник игрока"},
+        { label: "Фамилия", id: "surname", name: "surname", placeholder: "Введите фамилию" },
+        { label: "Имя", id: "name", name: "name", placeholder: "Введите имя" },
+        { label: "Отчество", id: "middle_name", name: "middle_name", placeholder: "Введите отчество" },
+        { label: "Discord", id: "discord", name: "discord", placeholder: "Введите ник игрока" },
+        { label: "Почта", id: "Email", name: "Email", placeholder: "Введите почту игрока" },
+        { label: "Ник в руме", id: "nickname", name: "nickname", placeholder: "Введите ник игрока" },
     ];
 
-    const handleChange = (e) => {
-        const {name, value} = e.target;
+    const handleChange = useCallback((e) => {
+        const { name, value } = e.target;
         setFormData((prevData) => ({
             ...prevData,
             [name]: value,
         }));
-    };
+        setErrors((prevErrors) => ({
+            ...prevErrors,
+            [name]: false,
+        }));
+    }, []);
+
+    const handlePhoneNumberChange = useCallback((phoneNumber) => {
+        setFormData((prevData) => ({ ...prevData, phonenumber: phoneNumber }));
+        setErrors((prevErrors) => ({ ...prevErrors, phonenumber: false }));
+    }, []);
+
+    const validateFields = useCallback(() => {
+        const newErrors = {};
+        if (!formData.name.trim()) newErrors.name = true;
+        //if (!formData.Email || !/\S+@\S+\.\S+/.test(formData.Email)) newErrors.Email = true;
+        //if (!formData.phonenumber || formData.phonenumber.length < 10) newErrors.phonenumber = true;
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    }, [formData, fields]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!validateFields()) return;
+
         setIsSubmitting(true);
+        setIsLoading(true);
 
         try {
             const response = await axios.post("http://135.181.84.236/api/search-players", formData);
-            console.log("Ответ от сервера:", response.data);
-            console.log(formData);
-            alert("Данные успешно отправлены!");
+            setSearchResults(response.data);
+            console.log(formData.phonenumber);
         } catch (error) {
             console.error("Ошибка при отправке данных:", error);
-            console.log(formData);
-            console.log("Ошибка при отправке данных. Проверьте соединение с сервером.");
         } finally {
-            setIsSubmitting(false);
+            setTimeout(() => {
+                setIsSubmitting(false);
+                setIsLoading(false);
+            }, 1500);
         }
     };
 
-    return (
-        <form className="search__wrapper" autoComplete="off" method="POST" onSubmit={handleSubmit}>
-            <div className="search__box">
-                {fields.slice(0, 3).map(({label, name, type = "text", placeholder}) => (
-                    <div className="search" key={name}>
-                        <label className="search__label" htmlFor={name}>
-                            {label}
-                        </label>
-                        <input
-                            className="search__input"
-                            type={type}
-                            name={name}
-                            placeholder={placeholder}
-                            value={formData[name] || ""}
-                            onChange={handleChange}
-                        />
-                    </div>
-                ))}
+    const renderInput = useCallback(
+        ({ label, id, name, placeholder }) => (
+            <div className="search" key={name}>
+                <label className="search__label" htmlFor={id}>
+                    {label}
+                </label>
+                <input
+                    className={`search__input ${errors[name] ? "search__input-error" : ""}`}
+                    id={id}
+                    type="text"
+                    name={name}
+                    placeholder={placeholder}
+                    value={formData[name] || ""}
+                    onChange={handleChange}
+                />
             </div>
+        ),
+        [errors, formData, handleChange]
+    );
 
-
+    return (
+        <form className="search__wrapper" autoComplete="off" onSubmit={handleSubmit}>
+            <div className="search__box">
+                {fields.slice(0, 3).map(renderInput)}
+            </div>
             <div className="search__box-bottom">
-                {fields.slice(3).map(({label, name, type, placeholder}) => (
-                    <div className="search" key={name}>
-                        <label className="search__label" htmlFor={name}>
-                            {label}
-                        </label>
-                        <input
-                            className="search__input"
-                            type={type}
-                            name={name}
-                            placeholder={placeholder}
-                            value={formData[name] || ""}
-                            onChange={handleChange}
-                        />
-                    </div>
-                ))}
-
+                {fields.slice(3).map(renderInput)}
+                <CountrySelect onPhoneNumberChange={handlePhoneNumberChange} />
             </div>
             <button type="submit" className="search__btn" disabled={isSubmitting}>
-                {isSubmitting ? "Идет отправка..." : "Найти игрока"}
+                {isSubmitting ? "Идет поиск..." : "Найти игрока"}
             </button>
         </form>
     );
-}
+};
 
-export default SearchForm
+export default SearchForm;
