@@ -37,7 +37,7 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    container_name: PR_frontend
+    container_name: frontend
     networks:
       - laravel_net
 
