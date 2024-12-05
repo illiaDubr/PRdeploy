@@ -17,6 +17,8 @@ services:
       - DB_DATABASE=pr_searching
       - DB_USERNAME=pr_user
       - DB_PASSWORD=password
+    depends_on:
+      - db
 
   db:
     image: mysql:8.2
