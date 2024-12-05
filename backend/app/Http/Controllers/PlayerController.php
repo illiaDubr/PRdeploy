@@ -65,10 +65,8 @@ class PlayerController extends Controller
             })
             ->get();
 
-        // Если ничего не найдено или параметры не совпадают
-        if ($results->isEmpty()) {
-            return response()->json(['message' => 'User not found'], 200);
-        }
+        
+        
 
         // Возвращаем результаты
         return response()->json($results);
