@@ -51,7 +51,6 @@ services:
     depends_on:
       - backend
       - frontend
-    entrypoint: ["/wait-for-it.sh", "PR_backend:8000", "--", "/wait-for-it.sh", "frontend:3000", "--", "nginx", "-g", "daemon off;"]
     networks:
       - laravel_net
 
