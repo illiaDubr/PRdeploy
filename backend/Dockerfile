@@ -21,7 +21,8 @@ RUN composer install
 RUN chown -R www-data:www-data /var/www
 
 # Expose порт для веб-сервера
-EXPOSE 9000
+EXPOSE 8000
 
-CMD ["php-fpm"]
+# Запуск сервера Laravel
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
 
