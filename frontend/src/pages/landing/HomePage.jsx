@@ -4,7 +4,9 @@ import "../../style/helpers/fonts.scss";
 import { Context } from "../../api/store/storeContext.js";
 import LogoutBtn from "../../components/main/components/LogoutBtn.jsx";
 import Auth from "../../components/main/section/HomePage/auth/Auth.jsx";
+import Cookies from 'js-cookie';
 
+ 
 
 
 function HomePage() {
@@ -22,6 +24,11 @@ function HomePage() {
         return <div>Загрузка...</div>;
     }
 
+
+    Cookies.set('token', 'токен', { expires: 7, path: '/' });
+
+const token = Cookies.get('token');
+console.log(token);
 
 
     return (
