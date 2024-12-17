@@ -8,7 +8,7 @@ import {Context} from "../api/store/storeContext.js";
 const AppRouter = () => {
     const {store} = React.useContext(Context);
 
-    console.log(store);
+    console.log(store.isAuth);
 
     return (
         <Routes>
