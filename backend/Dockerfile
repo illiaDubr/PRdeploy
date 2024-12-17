@@ -1,9 +1,9 @@
 FROM php:8.2-fpm
 
-# Установка необходимых пакетов и зависимостей
+# Установка необходимых пакетов и расширений
 RUN apt-get update && apt-get install -y \
-    libzip-dev zip unzip git && \
-    docker-php-ext-install pdo pdo_mysql
+    libzip-dev zip unzip git libxml2-dev && \
+    docker-php-ext-install pdo pdo_mysql dom
 
 # Установка Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -15,10 +15,12 @@ WORKDIR /var/www
 COPY . .
 
 # Установка зависимостей через Composer
-RUN composer install
+RUN composer install --no-dev --optimize-autoloader
 
 # Установка прав доступа
 RUN chown -R www-data:www-data /var/www
 
 # Expose порт для веб-сервера
 EXPOSE 9000
+
+CMD ["php-fpm"]
