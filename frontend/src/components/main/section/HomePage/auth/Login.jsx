@@ -1,10 +1,16 @@
+import React, { useContext, useState } from 'react';
 import {Modal, useModal} from "../../../components/Modal.jsx";
 import IconSvg from "../../../components/IconSvg.jsx";
 import NewPassword from "./NewPassword.jsx";
+import { Context } from "../../../../../api/store/storeContext.js";
 
 function Login() {
-    const {openModal, goBack, closeAllModals} = useModal();
+    const {openModal, closeAllModals} = useModal();
     const { button: newPasswordButton, modal: newPasswordModal } = NewPassword();
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const {store} = useContext(Context);
 
     const openLogin = () => {
         openModal("Login");
@@ -32,18 +38,31 @@ function Login() {
                             <label htmlFor="email" className="label">
                                 Почта
                             </label>
-                            <input className="input" id="email" type="email" placeholder="Введите почту"/>
+                            <input
+                                onChange={e => setEmail(e.target.value)}
+                                value={email}
+                                className="input"
+                                id="email" type="email"
+                                placeholder="Введите почту"
+                            />
                         </div>
                         <div className="modal__input-box">
-                            <label htmlFor="password" className="label">
+                            <label htmlFor="loginPassword" className="label">
                                 Пароль
                             </label>
-                            <input className="input" id="password" type="password" placeholder="Пароль"/>
+                            <input
+                                onChange={e => setPassword(e.target.value)}
+                                value={password}
+                                className="input"
+                                id="loginPassword"
+                                type="password"
+                                placeholder="Пароль"
+                            />
                         </div>
                         <p className="modal__text">
                             Забыли пароль? {newPasswordButton}
                         </p>
-                        <button className="modal__form-btn" type="submit">
+                        <button className="modal__form-btn" type="submit" onClick={() => store.login(email, password)}>
                             Войти
                         </button>
                     </form>

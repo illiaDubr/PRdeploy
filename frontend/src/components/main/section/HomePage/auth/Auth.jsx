@@ -69,7 +69,7 @@ function Auth() {
                             placeholder="Пароль"/>
                     </div>
                     <p className="modal__text">
-                        У вас уже есть аккаунт? {/*{loginButton}*/}
+                        У вас уже есть аккаунт? {loginButton}
                     </p>
                     <button className="modal__form-btn" type="submit"
                             onClick={() => store.registration(email, password, confirmPassword)}>
@@ -77,7 +77,7 @@ function Auth() {
                     </button>
                 </form>
             </Modal>
-            {/*{LoginModal}*/}
+            {LoginModal}
         </>
     )
 }
