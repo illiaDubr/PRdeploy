@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import axios from "axios";
-import CountrySelect from "@/components/main/section/search/CountrySelect";
+import CountrySelect from "./CountrySelect.jsx";
 
 const SearchForm = ({ setSearchResults, setIsLoading }) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -43,13 +43,39 @@ const SearchForm = ({ setSearchResults, setIsLoading }) => {
 
     const validateFields = useCallback(() => {
         const newErrors = {};
-        if (!formData.name.trim()) newErrors.name = true;
-        //if (!formData.Email || !/\S+@\S+\.\S+/.test(formData.Email)) newErrors.Email = true;
-        //if (!formData.phonenumber || formData.phonenumber.length < 10) newErrors.phonenumber = true;
-
+        if (
+            !formData.surname.trim() &&
+            !formData.discord.trim() &&
+            !formData.nickname.trim()
+        ) {
+            newErrors.surname = true;
+            newErrors.discord = true;
+            newErrors.nickname = true;
+        }
         setErrors(newErrors);
+
+        // Удаление ошибок через 3 секунды
+        if (Object.keys(newErrors).length > 0) {
+            setTimeout(() => {
+                setErrors({});
+            }, 3000);
+        }
+
         return Object.keys(newErrors).length === 0;
-    }, [formData, fields]);
+    }, [formData]);
+
+    const getErrorMessage = (fieldName) => {
+        switch (fieldName) {
+            case "surname":
+                return "Фамилия обязательна, если другие поля пусты.";
+            case "discord":
+                return "Введите Discord, если другие поля пусты.";
+            case "nickname":
+                return "Ник в руме обязателен, если другие поля пусты.";
+            default:
+                return "Это поле обязательно.";
+        }
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -87,6 +113,11 @@ const SearchForm = ({ setSearchResults, setIsLoading }) => {
                     value={formData[name] || ""}
                     onChange={handleChange}
                 />
+                {errors[name] && (
+                    <span className="search__error-message" aria-live="polite">
+                        {getErrorMessage(name)}
+                    </span>
+                )}
             </div>
         ),
         [errors, formData, handleChange]

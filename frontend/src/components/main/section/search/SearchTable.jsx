@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import TableLoader from "@/components/main/section/search/TableLoader";
-import TableWarning from "@/components/main/section/search/TableWarning";
+import TableLoader from "./TableLoader.jsx";
+import TableWarning from "./TableWarning.jsx";
+
 
 const SearchTable = ({ results, isLoading, isSearchPerformed }) => {
     const tableRef = useRef(null);

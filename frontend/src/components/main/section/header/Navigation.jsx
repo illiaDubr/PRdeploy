@@ -1,6 +1,6 @@
 import React from 'react';
-import IconSvg from "@/components/main/section/components/IconSvg";
 import {Link} from "react-router-dom";
+import IconSvg from "../../components/IconSvg.jsx";
 
 const Navigation = ({onButtonClick}) => {
     const [isOpen, setIsOpen] = React.useState(false);

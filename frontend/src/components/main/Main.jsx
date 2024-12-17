@@ -1,7 +1,7 @@
-import React from "react";
-import Header from "@/components/main/section/header/Header";
-import SectionHeader from "@/components/main/section/components/SectionHeader";
-import Resize from "@/components/main/section/components/Resize";
+import Header from "./section/header/Header.jsx";
+import SectionHeader from "./components/SectionHeader.jsx";
+import Resize from "./components/Resize.jsx";
+import "../../style/components/main/main.scss";
 
 const Main = ({ children, secClassName, secID }) => (
     <>

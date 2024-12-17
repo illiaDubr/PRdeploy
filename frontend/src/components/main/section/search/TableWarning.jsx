@@ -1,5 +1,6 @@
 import React from 'react';
-import IconSvg from "@/components/main/section/components/IconSvg";
+import IconSvg from "../../components/IconSvg.jsx";
+
 
 const TableWarning = ({children, id}) => {
     return (

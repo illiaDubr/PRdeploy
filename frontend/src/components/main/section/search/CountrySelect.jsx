@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "flag-icons/css/flag-icons.min.css";
-import IconSvg from "@/components/main/section/components/IconSvg";
+import IconSvg from "../../components/IconSvg.jsx";
+
 
 const CountrySelect = ({ onPhoneNumberChange }) => {
     const countryCodes = [

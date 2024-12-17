@@ -1,6 +1,7 @@
 import React from 'react';
 import StickyBox from "react-sticky-box";
-import Navigation from "@/components/main/section/header/Navigation";
+import "../../../../style/components/main/section/header/header.scss";
+import Navigation from "./Navigation.jsx";
 
 const Header = () => {
     const [isButtonClicked, setIsButtonClicked] = React.useState(false);
