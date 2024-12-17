@@ -37,11 +37,11 @@ export default class Store {
     }
 
 
-    async registration(email, password) {
+    async registration(email, password, confirmPassword) {
         event.preventDefault();
-        console.log('Отправляемые данные:', { email, password });
+        console.log('Отправляемые данные:', { email, password, confirmPassword });
         try {
-            const response = await AuthService.registration(email, password);
+            const response = await AuthService.registration(email, password, confirmPassword);
             console.log(response);
             localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);

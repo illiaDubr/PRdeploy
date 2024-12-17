@@ -15,7 +15,7 @@ function HomePage() {
                 </title>
             </Helmet>
             <h1>
-                Player`s Reputation
+                Player`s Reputation<sub style={{fontSize: "20px", opacity: ".6"}}>beta</sub>
             </h1>
             <Auth />
         </>

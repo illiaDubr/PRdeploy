@@ -10,6 +10,7 @@ function Auth() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const {store} = useContext(Context);
 
     const openFirstModal = () => {
@@ -55,11 +56,23 @@ function Auth() {
                             type="password"
                             placeholder="Пароль"/>
                     </div>
+                    <div className="modal__input-box">
+                        <label htmlFor="password_confirmation" className="label">
+                            Повторите пароль
+                        </label>
+                        <input
+                            onChange={e => setConfirmPassword(e.target.value)}
+                            value={confirmPassword}
+                            className="input"
+                            id="password_confirmation"
+                            type="password"
+                            placeholder="Пароль"/>
+                    </div>
                     <p className="modal__text">
                         У вас уже есть аккаунт? {/*{loginButton}*/}
                     </p>
                     <button className="modal__form-btn" type="submit"
-                            onClick={() => store.registration(email, password)}>
+                            onClick={() => store.registration(email, password, confirmPassword)}>
                         Зарегистрироваться
                     </button>
                 </form>
