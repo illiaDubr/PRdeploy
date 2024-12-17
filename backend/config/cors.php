@@ -14,17 +14,11 @@ return [
     | To learn more: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
     |
     */
-
-    'paths' => ['*'],
-
-    'allowed_methods' => ['*'],
-
-    'allowed_origins' => [env('FRONTEND_URL', 'http://localhost:3000')],
-
+    'paths' => ['*'],             // Разрешаем CORS для всех путей
+    'allowed_methods' => ['*'],   // Разрешаем все методы: GET, POST, PUT, DELETE и т.д.
+    'allowed_origins' => ['*'],   // Разрешаем все источники (origins)
     'allowed_origins_patterns' => [],
-
-    'allowed_headers' => ['*'],
-
+    'allowed_headers' => ['*'],   // Разрешаем все заголовки
     'exposed_headers' => [],
 
     'max_age' => 0,
