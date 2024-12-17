@@ -3,29 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\PlayerSData;
+use App\Models\Player;
 use Illuminate\Http\Request;
 
 class PlayerController extends Controller
 {
     public function search(Request $request)
     {
-        // Получаем данные из запроса
-        $name = $request->input('name');
-        $surname = $request->input('surname');
-        $middle_name = $request->input('middle_name');
-        $discord = $request->input('discord');
-        $email = $request->input('Email');
+        // Достаём параметры запроса
+        $first_name   = $request->input('first_name');
+        $last_name    = $request->input('last_name');
+        $middle_name  = $request->input('middle_name');
+        $discord      = $request->input('discord');
         $phonenumber = $request->input('phonenumber');
-        $nickname = $request->input('nickname');
+        $email        = $request->input('email');
+        $nickname     = $request->input('nickname');
 
-        // Строим запрос
-        $results = PlayerSData::query()
-            ->when($name, function ($query, $name) {
-                return $query->where('name', 'like', '%' . $name . '%');
+        $results = Player::query()
+            ->when($first_name, function ($query, $first_name) {
+                return $query->where('first_name', 'like', '%' . $first_name . '%');
             })
-            ->when($surname, function ($query, $surname) {
-                return $query->where('surname', 'like', '%' . $surname . '%');
+            ->when($last_name, function ($query, $last_name) {
+                return $query->where('last_name', 'like', '%' . $last_name . '%');
             })
             ->when($middle_name, function ($query, $middle_name) {
                 return $query->where('middle_name', 'like', '%' . $middle_name . '%');
@@ -36,8 +35,8 @@ class PlayerController extends Controller
             ->when($phonenumber, function ($query, $phonenumber) {
                 return $query->where('phonenumber', 'like', '%' . $phonenumber . '%');
             })
-            // Проверка никнейма по нескольким полям
             ->when($nickname, function ($query, $nickname) {
+                // Проверка никнейма по нескольким столбцам
                 return $query->where(function ($q) use ($nickname) {
                     $q->where('nickPS', 'like', '%' . $nickname . '%')
                         ->orWhere('nickGG', 'like', '%' . $nickname . '%')
@@ -53,22 +52,15 @@ class PlayerController extends Controller
                         ->orWhere('nickiPoker', 'like', '%' . $nickname . '%');
                 });
             })
-            // Проверка email по нескольким полям
             ->when($email, function ($query, $email) {
-                return $query->where(function ($q) use ($email) {
-                    $q->where('mailSkrill', 'like', '%' . $email . '%')
-                        ->orWhere('mailNeteller', 'like', '%' . $email . '%')
-                        ->orWhere('mailGipsyTeam', 'like', '%' . $email . '%')
-                        ->orWhere('mailLuxon', 'like', '%' . $email . '%')
-                        ->orWhere('Email', 'like', '%' . $email . '%');
-                });
+                return $query->where('email', 'like', '%' . $email . '%');
             })
             ->get();
 
-        
-        
+        if ($results->isEmpty()) {
+            return response()->json(['message' => 'User not found'], 200);
+        }
 
-        // Возвращаем результаты
         return response()->json($results);
     }
 }
