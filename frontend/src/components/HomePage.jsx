@@ -17,7 +17,6 @@ function HomePage() {
             <h1>
                 Player`s Reputation
             </h1>
-            <Link to="/main/section/PersonalAccount">Личный кабинет</Link>
             <Auth />
         </>
     )

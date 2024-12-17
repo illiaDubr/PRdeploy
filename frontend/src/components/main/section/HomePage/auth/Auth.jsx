@@ -18,7 +18,7 @@ function Auth() {
 
     return (
         <>
-            <button type="button" onClick={openFirstModal}>
+            <button type="button" onClick={openFirstModal} className="temporary">
                 Регистрация
             </button>
 
