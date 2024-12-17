@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 //     ->name('register');
 
 Route::post('/login', [AuthenticatedSessionController::class, 'store'])
-    ->middleware('guest')
+    // ->middleware('guest')
     ->name('login');
 
 Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])
