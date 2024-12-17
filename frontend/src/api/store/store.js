@@ -25,6 +25,8 @@ export default class Store {
     }
 
     async login(email, password) {
+        event.preventDefault();
+        console.log('Отправляемые данные:', { email, password });
         try {
             const response = await AuthService.login(email, password);
             console.log(response);
@@ -76,5 +78,4 @@ export default class Store {
             this.setLoading(false);
         }
     }
-
 }
