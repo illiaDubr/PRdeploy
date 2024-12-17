@@ -1,7 +1,20 @@
 import $api from "../http/index.js";
 
 export default class AuthService {
+    static async getCsrfToken() {
+        try {
+            await $api.get('/sanctum/csrf-cookie',{
+                withCredentials: true,
+            });
+            console.log("хуй");
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
     static async login(email, password) {
+        await this.getCsrfToken();
         return $api.post('/login', { email, password });
     }
 
