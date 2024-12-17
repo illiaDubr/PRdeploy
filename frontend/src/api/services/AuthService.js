@@ -15,16 +15,8 @@ export default class AuthService {
 
     static async login(email, password) {
         await this.getCsrfToken();
-        const csrfToken = getCookie('XSRF-TOKEN');
-
-        return $api.post('/login', 
-            { email, password }, 
-            {
-                withCredentials: true,
-                headers: {
-                    'X-XSRF-TOKEN': csrfToken,
-                },
-            }
+        return $api.post('/login', { email, password,withCredentials: true, }
+            
         );
     }
 
