@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PersonalAccessTokenController;
-
+use App\Http\Controllers\Auth\RegisteredUserController;
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -20,6 +20,11 @@ Route::controller(\App\Http\Controllers\PlayerController::class)
 
 Route::post('/personal-access-tokens', [PersonalAccessTokenController::class, 'token']);
 Route::delete('/personal-access-tokens', [PersonalAccessTokenController::class, 'destroy'])->middleware('auth:sanctum');
+
+
+Route::post('/register', [RegisteredUserController::class, 'store'])
+    ->middleware('guest')
+    ->name('register');
 
 
 Route::controller(\App\Http\Controllers\UserController::class)->group(function (){
