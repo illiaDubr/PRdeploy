@@ -29,7 +29,7 @@ Route::delete('/personal-access-tokens', [PersonalAccessTokenController::class, 
 
 
 Route::post('/register', [RegisteredUserController::class, 'store'])
-    ->middleware('guest')
+    // ->middleware('guest')
     ->name('register');
 
     // Route::post('/login', [AuthenticatedSessionController::class, 'store'])
