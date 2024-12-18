@@ -11,15 +11,12 @@ function HomePage() {
 
     React.useEffect(() => {
         if (localStorage.getItem('token')) {
-            store.checkAuth().then(r =>
-                console.log("Check Auth"),
-            );
+            store.checkAuth();
         }
     }, [store]);
 
-    if (store.isLoading) {
-        return <div>Загрузка...</div>;
-    }
+    console.log('isAuth:', store.isAuth);
+    console.log('user:', store.user);
 
 
     return (
