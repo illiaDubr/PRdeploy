@@ -26,7 +26,9 @@ Route::controller(\App\Http\Controllers\PlayerController::class)
 
 Route::post('/personal-access-tokens', [PersonalAccessTokenController::class, 'token']);
 Route::delete('/personal-access-tokens', [PersonalAccessTokenController::class, 'destroy'])->middleware('auth:sanctum');
-
+Route::post('/sanctum/csrf-cookie', [RegisteredUserController::class, 'store'])
+    // ->middleware('guest')
+    ->name('register');
 
 Route::post('/register', [RegisteredUserController::class, 'store'])
     ->middleware('guest')
