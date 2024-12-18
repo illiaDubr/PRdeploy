@@ -19,13 +19,12 @@ export default class AuthService {
             await this.getCsrfToken();
 
             // Выполняем запрос на логин
-            const response = await $api.post('/api/login', { 
-                email, 
-                password 
+            return await $api.post('/api/login', {
+                email,
+                password
             }, {
                 withCredentials: true  // Обязательно для передачи куки
             });
-            return response;
         } catch (error) {
             console.error("Ошибка при логине:", error);
             throw error;
@@ -37,14 +36,13 @@ export default class AuthService {
             // Получаем CSRF токен перед отправкой запроса
             await this.getCsrfToken();
             // Выполняем запрос на регистрацию
-            const response = await $api.post('/api/register', { 
-                email, 
+            return await $api.post('/api/register', {
+                email,
                 password,
                 password_confirmation
             }, {
                 withCredentials: true  // Обязательно для передачи куки
             });
-            return response;
         } catch (error) {
             console.error("Ошибка при регистрации:", error);
             throw error;
