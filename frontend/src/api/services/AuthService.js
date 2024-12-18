@@ -1,21 +1,21 @@
 import $api from "../http/index.js";
 
 export default class AuthService {
-    static async getCsrfToken() {
-        try {
-            await $api.get('/sanctum/csrf-cookie', { withCredentials: true });
-            console.log("CSRF-токен успешно получен.");
-        } catch (error) {
-            console.error("Ошибка получения CSRF-токена:", error);
-            throw error;
-        }
-    }
+    // static async getCsrfToken() {
+    //     try {
+    //         await $api.get('/sanctum/csrf-cookie', { withCredentials: true });
+    //         console.log("CSRF-токен успешно получен.");
+    //     } catch (error) {
+    //         console.error("Ошибка получения CSRF-токена:", error);
+    //         throw error;
+    //     }
+    // }
 
     // Метод для входа в систему
     static async login(email, password) {
         try {
             // Получаем CSRF токен перед отправкой запроса
-            await this.getCsrfToken();
+            // await this.getCsrfToken();
 
             // Выполняем запрос на логин
             const response = await $api.post('/login', { 
