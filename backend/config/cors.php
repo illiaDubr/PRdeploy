@@ -14,7 +14,7 @@ return [
     | To learn more: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
     |
     */
-    'paths' => ['api/*', 'sanctum/csrf-cookie'], // Пути, на которых CORS активен
+    'paths' => ['api/*',], // Пути, на которых CORS активен
     'allowed_methods' => ['*'],   // Разрешаем все методы: GET, POST, PUT, DELETE и т.д.
     'allowed_origins' => ['FRONTEND_URL','http://localhost:3000', 'http://135.181.84.236'], // Конкретные origins
     'allowed_origins_patterns' => [],
