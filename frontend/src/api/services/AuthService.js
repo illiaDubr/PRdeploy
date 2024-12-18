@@ -1,5 +1,6 @@
 import $api from "../http/index.js";
 
+
 export default class AuthService {
     static async getCsrfToken() {
         try {
@@ -18,7 +19,7 @@ export default class AuthService {
             await this.getCsrfToken();
 
             // Выполняем запрос на логин
-            const response = await $api.post('/api/login', { 
+            const response = await $api.post('/login', { 
                 email, 
                 password 
             }, {
@@ -35,8 +36,7 @@ export default class AuthService {
         try {
             // Получаем CSRF токен перед отправкой запроса
             await this.getCsrfToken();
-
-            // Выполняем запрос на логин
+            // Выполняем запрос на регистрацию
             const response = await $api.post('/api/register', { 
                 email, 
                 password,
