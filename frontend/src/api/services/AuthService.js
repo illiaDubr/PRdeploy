@@ -18,7 +18,7 @@ export default class AuthService {
             await this.getCsrfToken();
 
             // Выполняем запрос на логин
-            const response = await $api.post('/login', { 
+            const response = await $api.post('/api/login', { 
                 email, 
                 password 
             }, {
