@@ -16,7 +16,7 @@ class PersonalAccessTokenController extends Controller
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
-            'device_name' => 'required'
+            'device_name' => 'nullable'
         ]);
 
         // Поиск пользователя по email
