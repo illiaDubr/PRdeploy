@@ -8,8 +8,6 @@ import {observer} from "mobx-react-lite";
 const AppRouter = observer(() => {
     const {store} = React.useContext(Context);
 
-    console.log(store.isAuth);
-
     return (
         <Routes>
             {store.isAuth && authRoutes.map(({path, Component}) =>
