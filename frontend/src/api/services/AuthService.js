@@ -14,40 +14,13 @@ export default class AuthService {
 
     // Метод для входа в систему
     static async login(email, password) {
-        try {
-            // Получаем CSRF токен перед отправкой запроса
-            await this.getCsrfToken();
-
-            // Выполняем запрос на логин
-            return await $api.post('/api/login', {
-                email,
-                password
-            }, {
-                withCredentials: true  // Обязательно для передачи куки
-            });
-        } catch (error) {
-            console.error("Ошибка при логине:", error);
-            throw error;
-        }
+        await this.getCsrfToken();
+        return $api.post('/login', { email, password });
     }
 
     static async registration(email, password, password_confirmation) {
-        try {
-            // Получаем CSRF токен перед отправкой запроса
-            await this.getCsrfToken();
-            // Выполняем запрос на регистрацию
-            return await $api.post('/api/register', {
-                email,
-                password,
-                password_confirmation
-            }, {
-                withCredentials: true  // Обязательно для передачи куки
-            });
-        } catch (error) {
-            console.error("Ошибка при регистрации:", error);
-            throw error;
-        }
-        // return $api.post('/api/register', { email, password,  password_confirmation});
+        await this.getCsrfToken();
+        return $api.post('/register', { email, password, password_confirmation }, { withCredentials: true });
     }
 
     static async logout() {
