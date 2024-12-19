@@ -1,15 +1,12 @@
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { Modal, useModal } from "../../../components/Modal.jsx";
 import IconSvg from "../../../components/IconSvg.jsx";
-import Login from "./Login.jsx";
 import { Context } from "../../../../../api/store/storeContext.js";
-//import TwoFA from "./TwoFA.jsx";
 
 function Auth() {
-    const {store} = useContext(Context);
+    const { store } = useContext(Context);
 
-    const {button: loginButton, modal: LoginModal} = Login();
-    const {openModal, closeAllModals} = useModal();
+    const { openModal, closeAllModals } = useModal();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -19,13 +16,11 @@ function Auth() {
         openModal("FirstModal");
     }
 
-    const handleSubmit = async () => {
-        try {
-            await store.registration(email, password, confirmPassword);
+    const handleSubmit = async (e) => {
+        await store.registration(email, password, confirmPassword, e);
+        if (!store.errors.registration.general) {
             await store.verification(email);
-            //openModal("TwoFA");
-        } catch (error) {
-            console.error('Ошибка при регистрации:', error);
+            closeAllModals();
         }
     }
 
@@ -42,7 +37,7 @@ function Auth() {
                         <IconSvg width="36" height="36" id="close-menu"/>
                     </button>
                 </div>
-                <form method="POST" className="modal__body" autoComplete="off">
+                <form method="POST" className="modal__body" autoComplete="off" onSubmit={handleSubmit}>
                     <div className="modal__input-box">
                         <label htmlFor="email" className="label">
                             Почта
@@ -55,6 +50,9 @@ function Auth() {
                             type="email"
                             placeholder="Введите почту"
                         />
+                        {store.errors.registration.email && (
+                            <span className="error">{store.errors.registration.email}</span>
+                        )}
                     </div>
                     <div className="modal__input-box">
                         <label htmlFor="password" className="label">
@@ -81,17 +79,13 @@ function Auth() {
                             placeholder="Пароль"/>
                     </div>
                     <p className="modal__text">
-                        У вас уже есть аккаунт? {loginButton}
+                        У вас уже есть аккаунт?
                     </p>
-                    <button className="modal__form-btn" type="submit"
-                            onClick={handleSubmit}>
+                    <button className="modal__form-btn" type="submit">
                         Зарегистрироваться
                     </button>
                 </form>
             </Modal>
-            {LoginModal}
-
-
         </>
     )
 }

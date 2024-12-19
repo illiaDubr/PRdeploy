@@ -3,8 +3,9 @@ import {Route, Routes} from "react-router-dom";
 import {authRoutes, publicRoutes} from "../routes.js";
 import NotFoundPage from "../pages/platform/404/NotFoundPage.jsx";
 import {Context} from "../api/store/storeContext.js";
+import {observer} from "mobx-react-lite";
 
-const AppRouter = () => {
+const AppRouter = observer(() => {
     const {store} = React.useContext(Context);
 
     return (
@@ -18,6 +19,6 @@ const AppRouter = () => {
             <Route path="*" element={<NotFoundPage />} />
         </Routes>
     );
-}
+})
 
 export default AppRouter;

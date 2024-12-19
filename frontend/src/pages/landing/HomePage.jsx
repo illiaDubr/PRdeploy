@@ -10,14 +10,6 @@ import {observer} from "mobx-react-lite";
 const HomePage = observer(() => {
     const {store} = React.useContext(Context);
 
-    React.useEffect(() => {
-        if (localStorage.getItem('token')) {
-            store.checkAuth();
-        }
-    }, [store]);
-
-    console.log('isAuth:', store.isAuth);
-
     return (
         <>
             <Helmet>
