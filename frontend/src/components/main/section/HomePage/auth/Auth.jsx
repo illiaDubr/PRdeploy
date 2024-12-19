@@ -22,7 +22,7 @@ function Auth() {
     const handleSubmit = async () => {
         try {
             await store.registration(email, password, confirmPassword);
-            await store.login(email);
+            await store.verification(email);
             //openModal("TwoFA");
         } catch (error) {
             console.error('Ошибка при регистрации:', error);
