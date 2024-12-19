@@ -12,15 +12,14 @@ export default class AuthService {
         }
     }
 
-    // Метод для входа в систему
     static async login(email, password) {
         await this.getCsrfToken();
-        return $api.post('/login', { email, password });
+        return $api.post('/api/login', { email, password });
     }
 
     static async registration(email, password, password_confirmation) {
         await this.getCsrfToken();
-        return $api.post('/register', { email, password, password_confirmation }, { withCredentials: true });
+        return $api.post('/api/register', { email, password, password_confirmation }, { withCredentials: true });
     }
 
     static async logout() {
