@@ -51,16 +51,26 @@ export default class Store {
         }
     }
 
-    async login(email, password) {
+    async login(email, password, event) {
         event.preventDefault();
-        this.clearError('login')
+        this.clearError('login');
+        console.log('Отправляемые данные:', { email, password });
         try {
             const response = await AuthService.login(email, password);
+            console.log(response);
             localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);
             this.setUser(response.data.user);
         } catch (e) {
+            if (e.response?.data?.errors) {
+                Object.entries(e.response.data.errors).forEach(([field, messages]) => {
+                    this.setError('login', field, messages.join(', '));
+                });
+            } else {
+                this.setError('login', 'general', e.response?.data?.message || "Ошибка при входе");
+            }
             console.log(e.response?.data?.message);
+            throw e;
         }
     }
 

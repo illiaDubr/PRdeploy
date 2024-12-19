@@ -17,10 +17,12 @@ function Auth() {
     }
 
     const handleSubmit = async (e) => {
-        await store.registration(email, password, confirmPassword, e);
-        if (!store.errors.registration.general) {
+        try {
+            await store.registration(email, password, confirmPassword, e);
             await store.verification(email);
             closeAllModals();
+        } catch (error) {
+            console.error('Ошибка при регистрации:', error);
         }
     }
 
