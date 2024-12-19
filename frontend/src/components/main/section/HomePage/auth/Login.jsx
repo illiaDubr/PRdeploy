@@ -8,7 +8,7 @@ function Login() {
     const {openModal, closeAllModals} = useModal();
     const { button: newPasswordButton, modal: newPasswordModal } = NewPassword();
 
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = React.useState('');
     const [password, setPassword] = useState('');
     const {store} = useContext(Context);
 
@@ -33,16 +33,17 @@ function Login() {
                             <IconSvg width="36" height="36" id="close-menu"/>
                         </button>
                     </div>
-                    <form typeof="POST" className="modal__body" autoComplete="off">
+                    <form method="POST" className="modal__body" autoComplete="off">
                         <div className="modal__input-box">
-                            <label htmlFor="email" className="label">
+                            <label htmlFor="loginEmail" className="label">
                                 Почта
                             </label>
                             <input
                                 onChange={e => setEmail(e.target.value)}
                                 value={email}
                                 className="input"
-                                id="email" type="email"
+                                id="loginEmail"
+                                type="email"
                                 placeholder="Введите почту"
                             />
                         </div>
@@ -60,14 +61,14 @@ function Login() {
                             />
                         </div>
                         <p className="modal__text">
-                            Забыли пароль? {newPasswordButton}
+                            Забыли пароль? {/*{newPasswordButton}*/}
                         </p>
                         <button className="modal__form-btn" type="submit" onClick={() => store.login(email, password)}>
                             Войти
                         </button>
                     </form>
                 </Modal>
-                {newPasswordModal}
+                {/*{newPasswordModal}*/}
             </>
         )
     }

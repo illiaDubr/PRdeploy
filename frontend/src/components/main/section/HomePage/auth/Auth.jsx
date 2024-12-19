@@ -30,7 +30,7 @@ function Auth() {
                         <IconSvg width="36" height="36" id="close-menu"/>
                     </button>
                 </div>
-                <form typeof="POST" className="modal__body" autoComplete="off">
+                <form method="POST" className="modal__body" autoComplete="off">
                     <div className="modal__input-box">
                         <label htmlFor="email" className="label">
                             Почта

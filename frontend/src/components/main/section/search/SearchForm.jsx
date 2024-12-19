@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import axios from "axios";
 import CountrySelect from "./CountrySelect.jsx";
 
@@ -124,7 +124,7 @@ const SearchForm = ({ setSearchResults, setIsLoading }) => {
     );
 
     return (
-        <form className="search__wrapper" autoComplete="off" onSubmit={handleSubmit}>
+        <form method="POST" className="search__wrapper" autoComplete="off" onSubmit={handleSubmit}>
             <div className="search__box">
                 {fields.slice(0, 3).map(renderInput)}
             </div>
