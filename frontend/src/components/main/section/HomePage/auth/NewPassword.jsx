@@ -33,7 +33,9 @@ function NewPassword() {
                             <label htmlFor="email" className="label">
                                 Почта
                             </label>
-                            <input className="input" id="email" type="email" placeholder="Введите почту"/>
+                            <input
+                                className="input"
+                                id="email" type="email" placeholder="Введите почту"/>
                         </div>
                         <div className="modal__input-box">
                             <label htmlFor="password" className="label">

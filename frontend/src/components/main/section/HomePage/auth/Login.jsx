@@ -4,7 +4,7 @@ import {Modal, useModal} from "../../../components/Modal.jsx";
 import IconSvg from "../../../components/IconSvg.jsx";
 import NewPassword from "./NewPassword.jsx";
 import { Context } from "../../../../../api/store/storeContext.js";
-import {ACCOUNT_ROUTE} from "../../../../../utils/const.js";
+import { ACCOUNT_ROUTE } from "../../../../../utils/const.js";
 
 function Login() {
     const navigate = useNavigate();
