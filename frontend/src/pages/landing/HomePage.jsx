@@ -17,8 +17,6 @@ const HomePage = observer(() => {
     }, [store]);
 
     console.log('isAuth:', store.isAuth);
-    console.log('user:', store.user);
-
 
     return (
         <>
@@ -27,13 +25,15 @@ const HomePage = observer(() => {
                     Player`s Reputation
                 </title>
             </Helmet>
-            <h1>
-                Player`s Reputation<sub style={{fontSize: "20px", opacity: ".5"}}>beta</sub>
-            </h1>
-            <Auth />
+            <div className="block">
+                <h1>
+                    Player`s Reputation<sub style={{fontSize: "20px", opacity: ".5"}}>beta</sub>
+                </h1>
+                <Auth/>
 
-            {store.isAuth ? `Пользователь авторизован` : 'АВТОРИЗУЙТЕСЬ'}
-            <LogoutBtn className="temporary"/>
+                {store.isAuth ? `Пользователь авторизован` : 'АВТОРИЗУЙТЕСЬ'}
+                <LogoutBtn className="temporary"/>
+            </div>
         </>
     )
 })

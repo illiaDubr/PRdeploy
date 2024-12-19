@@ -10,6 +10,14 @@ export default class Store {
 
     constructor() {
         makeAutoObservable(this);
+        this.initializeAuth()
+    }
+
+    initializeAuth() {
+        const token = localStorage.getItem('token');
+        if (token) {
+            this.checkAuth();
+        }
     }
 
     setAuth(bool) {

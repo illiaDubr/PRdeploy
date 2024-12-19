@@ -8,12 +8,6 @@ import {observer} from "mobx-react-lite";
 const AppRouter = observer(() => {
     const {store} = React.useContext(Context);
 
-    React.useEffect(() => {
-        if (localStorage.getItem('token')) {
-            store.checkAuth();
-        }
-    }, [store]);
-
     return (
         <Routes>
             {store.isAuth && authRoutes.map(({path, Component}) =>
