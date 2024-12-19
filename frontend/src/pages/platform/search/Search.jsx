@@ -1,9 +1,9 @@
 import React from "react";
 import "../../style/components/main/section/search/search.scss";
 import {Helmet} from "react-helmet-async";
-import Main from "../../components/main/Main.jsx";
-import SearchForm from "../../components/main/section/search/SearchForm.jsx";
-import SearchTable from "../../components/main/section/search/SearchTable.jsx";
+import Main from "../../../components/main/Main.jsx";
+import SearchForm from "../../../components/main/section/search/SearchForm.jsx";
+import SearchTable from "../../../components/main/section/search/SearchTable.jsx";
 
 function Search() {
     const [searchResults, setSearchResults] = React.useState([]);
