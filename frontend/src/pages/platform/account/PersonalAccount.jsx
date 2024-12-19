@@ -1,7 +1,7 @@
 import {Link} from "react-router-dom";
 import {Helmet} from "react-helmet-async";
 import "../../style/helpers/fonts.scss";
-import Main from "../../components/main/Main.jsx";
+import Main from "../../../components/main/Main.jsx";
 
 
 
