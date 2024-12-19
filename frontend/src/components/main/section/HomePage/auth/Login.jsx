@@ -1,10 +1,14 @@
 import React, { useContext, useState } from 'react';
+import {useNavigate} from "react-router-dom";
 import {Modal, useModal} from "../../../components/Modal.jsx";
 import IconSvg from "../../../components/IconSvg.jsx";
 import NewPassword from "./NewPassword.jsx";
 import { Context } from "../../../../../api/store/storeContext.js";
+import {ACCOUNT_ROUTE} from "../../../../../utils/const.js";
 
 function Login() {
+    const navigate = useNavigate();
+
     const {openModal, closeAllModals} = useModal();
     const { button: newPasswordButton, modal: newPasswordModal } = NewPassword();
 
@@ -14,6 +18,11 @@ function Login() {
 
     const openLogin = () => {
         openModal("Login");
+    }
+
+    const handleSubmit = async () => {
+        await store.login(email, password);
+        navigate(ACCOUNT_ROUTE);
     }
 
     const LoginButton = (
@@ -61,14 +70,14 @@ function Login() {
                             />
                         </div>
                         <p className="modal__text">
-                            Забыли пароль? {/*{newPasswordButton}*/}
+                            Забыли пароль? {newPasswordButton}
                         </p>
-                        <button className="modal__form-btn" type="submit" onClick={() => store.login(email, password)}>
+                        <button className="modal__form-btn" type="submit" onClick={handleSubmit}>
                             Войти
                         </button>
                     </form>
                 </Modal>
-                {/*{newPasswordModal}*/}
+                {newPasswordModal}
             </>
         )
     }

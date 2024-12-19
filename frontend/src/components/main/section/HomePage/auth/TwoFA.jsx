@@ -20,17 +20,17 @@ const TwoFA = () => {
             </div>
             <form method="POST" className="modal__body" autoComplete="off">
                 <p className="modal__text">
-                    На ваш электронный адрес  был отрпавлен код. Введите его, чтобы продолжить пользоваться платформой
+                    На ваш электронный адрес  был отправлен код. Введите его, чтобы продолжить пользоваться платформой
                 </p>
                 <div className="modal__input-box">
                     <label htmlFor="2FA" className="label">
-                        Почта
+                        Код двухфакторной аутентификации
                     </label>
                     <input
                         className="input"
                         id="2FA"
                         type="text"
-                        placeholder="Введите почту"
+                        placeholder="Введите код"
                     />
                 </div>
                 <button className="modal__form-btn" type="submit" onClick={() => store.verification( password )}>
