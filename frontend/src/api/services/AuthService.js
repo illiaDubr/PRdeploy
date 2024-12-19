@@ -26,7 +26,11 @@ export default class AuthService {
         return $api.post('/api/logout');
     }
 
-    static async verification() {
-        return $api.post('/email/verification-notification');
+    static async verification(email) {
+        return $api.post('/email/verification-notification', { email });
+    }
+
+    static async newPassword() {
+
     }
 }

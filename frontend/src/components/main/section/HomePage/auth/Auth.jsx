@@ -3,7 +3,7 @@ import { Modal, useModal } from "../../../components/Modal.jsx";
 import IconSvg from "../../../components/IconSvg.jsx";
 import Login from "./Login.jsx";
 import { Context } from "../../../../../api/store/storeContext.js";
-import TwoFA from "./TwoFA.jsx";
+//import TwoFA from "./TwoFA.jsx";
 
 function Auth() {
     const {store} = useContext(Context);
@@ -22,7 +22,8 @@ function Auth() {
     const handleSubmit = async () => {
         try {
             await store.registration(email, password, confirmPassword);
-            openModal("TwoFA");
+            await store.login(email);
+            //openModal("TwoFA");
         } catch (error) {
             console.error('Ошибка при регистрации:', error);
         }
@@ -90,7 +91,7 @@ function Auth() {
             </Modal>
             {LoginModal}
 
-            <TwoFA />
+
         </>
     )
 }

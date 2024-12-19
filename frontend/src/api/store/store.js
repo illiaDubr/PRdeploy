@@ -78,9 +78,9 @@ export default class Store {
         }
     }
 
-    async verification() {
+    async verification(email) {
         try {
-            const response = await AuthService.verification();
+            const response = await AuthService.verification(email);
             console.log(response);
         } catch (e) {
             console.log(e.response?.data?.message);
