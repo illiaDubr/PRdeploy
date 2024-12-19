@@ -25,7 +25,7 @@ function NewPassword() {
                             <IconSvg width="36" height="36" id="close-menu"/>
                         </button>
                     </div>
-                    <form typeof="POST" className="modal__body" autoComplete="off">
+                    <form method="POST" className="modal__body" autoComplete="off">
                         <p className="modal__text modal__text-left">
                             Введите свой адрес электронной почты, и мы вышлем вам ссылку для сброса пароля.
                         </p>

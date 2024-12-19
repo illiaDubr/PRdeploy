@@ -19,10 +19,14 @@ export default class AuthService {
 
     static async registration(email, password, password_confirmation) {
         await this.getCsrfToken();
-        return $api.post('/api/register', { email, password, password_confirmation }, { withCredentials: true });
+        return $api.post('/api/register', { email, password, password_confirmation });
     }
 
     static async logout() {
         return $api.post('/api/logout');
+    }
+
+    static async verification() {
+        return $api.post('/email/verification-notification');
     }
 }

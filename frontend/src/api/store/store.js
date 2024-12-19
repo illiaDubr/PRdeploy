@@ -38,7 +38,6 @@ export default class Store {
         }
     }
 
-
     async registration(email, password, password_confirmation) {
         event.preventDefault();
         console.log('Отправляемые данные:', { email, password, password_confirmation });
@@ -76,6 +75,15 @@ export default class Store {
             console.log(e.response?.data?.message);
         } finally {
             this.setLoading(false);
+        }
+    }
+
+    async verification() {
+        try {
+            const response = await AuthService.verification();
+            console.log(response);
+        } catch (e) {
+            console.log(e.response?.data?.message);
         }
     }
 }

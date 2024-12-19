@@ -3,18 +3,30 @@ import { Modal, useModal } from "../../../components/Modal.jsx";
 import IconSvg from "../../../components/IconSvg.jsx";
 import Login from "./Login.jsx";
 import { Context } from "../../../../../api/store/storeContext.js";
+import TwoFA from "./TwoFA.jsx";
 
 function Auth() {
+    const {store} = useContext(Context);
+
     const {button: loginButton, modal: LoginModal} = Login();
     const {openModal, closeAllModals} = useModal();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const {store} = useContext(Context);
 
     const openFirstModal = () => {
         openModal("FirstModal");
+    }
+
+    const handleSubmit = async () => {
+        try {
+            const user = await store.registration(email, password, confirmPassword);
+            openModal("TwoFA");
+        } catch (error) {
+            // Обработать ошибку, если нужно
+            console.error('Ошибка при регистрации:', error);
+        }
     }
 
     return (
@@ -72,12 +84,14 @@ function Auth() {
                         У вас уже есть аккаунт? {loginButton}
                     </p>
                     <button className="modal__form-btn" type="submit"
-                            onClick={() => store.registration(email, password, confirmPassword)}>
+                            onClick={handleSubmit}>
                         Зарегистрироваться
                     </button>
                 </form>
             </Modal>
             {LoginModal}
+
+            <TwoFA />
         </>
     )
 }
