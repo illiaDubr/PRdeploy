@@ -3,7 +3,7 @@ import {Modal, useModal} from "../../../components/Modal.jsx";
 import IconSvg from "../../../components/IconSvg.jsx";
 import {Context} from "../../../../../api/store/storeContext.js";
 import { useForm } from 'react-hook-form';
-import {schema} from "./schema.js";
+import {schemaAuth} from "./schema.js";
 import {yupResolver} from "@hookform/resolvers/yup";
 import Login from "./Login.jsx";
 import TwoFA from "./TwoFA.jsx";
@@ -23,7 +23,8 @@ function Auth() {
         reset,
         formState: {errors},
     } = useForm({
-        resolver: yupResolver(schema),
+        resolver: yupResolver(schemaAuth),
+        mode: 'onChange',
     });
 
     const openFirstModal = () => {

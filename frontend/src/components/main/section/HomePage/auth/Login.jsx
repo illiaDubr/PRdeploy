@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {Modal, useModal} from "../../../components/Modal.jsx";
 import {useForm} from 'react-hook-form';
-import {schema} from "./schema.js";
+import {schemaLogin} from "./schema.js";
 import {yupResolver} from "@hookform/resolvers/yup";
 import IconSvg from "../../../components/IconSvg.jsx";
 import {Context} from "../../../../../api/store/storeContext.js";
@@ -23,7 +23,8 @@ function Login() {
         reset,
         formState: {errors},
     } = useForm({
-        resolver: yupResolver(schema),
+        resolver: yupResolver(schemaLogin),
+        mode: 'onChange',
     });
 
     const submitForm = async () => {
@@ -31,7 +32,6 @@ function Login() {
         navigate(ACCOUNT_ROUTE);
         reset();
     }
-
 
     return (
         <>
@@ -51,7 +51,7 @@ function Login() {
                             {...register('email')}
                             onChange={e => setEmail(e.target.value)}
                             value={email}
-                            className="input"
+                            className={`input ${errors.email ? 'input__error' : ''}`}
                             id="loginEmail"
                             type="email"
                             placeholder="Введите почту"
@@ -66,7 +66,7 @@ function Login() {
                             {...register('password')}
                             onChange={e => setPassword(e.target.value)}
                             value={password}
-                            className="input"
+                            className={`input ${errors.password ? 'input__error' : ''}`}
                             id="loginPassword"
                             type="password"
                             placeholder="Пароль"
