@@ -2,7 +2,7 @@ import {useContext, useState} from 'react';
 import {Modal, useModal} from "../../../components/Modal.jsx";
 import IconSvg from "../../../components/IconSvg.jsx";
 import {Context} from "../../../../../api/store/storeContext.js";
-import { useForm, Controller } from 'react-hook-form';
+import {useForm, Controller} from 'react-hook-form';
 import {schema} from "./schema.js";
 import {yupResolver} from "@hookform/resolvers/yup";
 
@@ -20,7 +20,7 @@ function Auth() {
         register,
         handleSubmit,
         reset,
-        formState: { errors },
+        formState: {errors},
     } = useForm({
         resolver: yupResolver(schema),
     });
@@ -30,13 +30,9 @@ function Auth() {
     }
 
     const submitForm = async (e) => {
-        try {
-            await store.registration(email, password, confirmPassword, e);
-            await store.verification(email);
-            closeAllModals();
-        } catch (error) {
-            console.error('Ошибка при регистрации:', error);
-        }
+        await store.registration(email, password, confirmPassword, e);
+        await store.verification(email);
+        closeAllModals();
     }
 
     return (
