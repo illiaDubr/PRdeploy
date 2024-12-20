@@ -1,86 +1,88 @@
-import React, { useContext, useState } from 'react';
+import React, {useContext, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {Modal, useModal} from "../../../components/Modal.jsx";
+import {useForm} from 'react-hook-form';
+import {schema} from "./schema.js";
+import {yupResolver} from "@hookform/resolvers/yup";
 import IconSvg from "../../../components/IconSvg.jsx";
-import NewPassword from "./NewPassword.jsx";
-import { Context } from "../../../../../api/store/storeContext.js";
-import { ACCOUNT_ROUTE } from "../../../../../utils/const.js";
+import {Context} from "../../../../../api/store/storeContext.js";
+import {ACCOUNT_ROUTE} from "../../../../../utils/const.js";
 
 function Login() {
     const navigate = useNavigate();
 
-    const {openModal, closeAllModals} = useModal();
-    const { button: newPasswordButton, modal: newPasswordModal } = NewPassword();
+    const {closeAllModals} = useModal();
 
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = useState('');
     const {store} = useContext(Context);
 
-    const openLogin = () => {
-        openModal("Login");
-    }
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: {errors},
+    } = useForm({
+        resolver: yupResolver(schema),
+    });
 
-    const handleSubmit = async () => {
+    const submitForm = async () => {
         await store.login(email, password);
         navigate(ACCOUNT_ROUTE);
+        reset();
     }
 
-    const LoginButton = (
-        <button className="modal__link" type="button" onClick={openLogin}>
-            Войти
-        </button>
-    );
 
-    return {
-        button: LoginButton,
-        modal: (
-            <>
-                <Modal modalName="Login">
-                    <div className="modal__title">
-                        Вход
-                        <button className="modal__btn" type="button" onClick={closeAllModals}>
-                            <IconSvg width="36" height="36" id="close-menu"/>
-                        </button>
+    return (
+        <>
+            <Modal modalName="Login">
+                <div className="modal__title">
+                    Вход
+                    <button className="modal__btn" type="button" onClick={closeAllModals}>
+                        <IconSvg width="36" height="36" id="close-menu"/>
+                    </button>
+                </div>
+                <form method="POST" className="modal__body" autoComplete="off" onSubmit={handleSubmit(submitForm)}>
+                    <div className="modal__input-box">
+                        <label htmlFor="loginEmail" className="label">
+                            Почта
+                        </label>
+                        <input
+                            {...register('email')}
+                            onChange={e => setEmail(e.target.value)}
+                            value={email}
+                            className="input"
+                            id="loginEmail"
+                            type="email"
+                            placeholder="Введите почту"
+                        />
+                        <p className="input__error-text">{errors.email?.message}</p>
                     </div>
-                    <form method="POST" className="modal__body" autoComplete="off">
-                        <div className="modal__input-box">
-                            <label htmlFor="loginEmail" className="label">
-                                Почта
-                            </label>
-                            <input
-                                onChange={e => setEmail(e.target.value)}
-                                value={email}
-                                className="input"
-                                id="loginEmail"
-                                type="email"
-                                placeholder="Введите почту"
-                            />
-                        </div>
-                        <div className="modal__input-box">
-                            <label htmlFor="loginPassword" className="label">
-                                Пароль
-                            </label>
-                            <input
-                                onChange={e => setPassword(e.target.value)}
-                                value={password}
-                                className="input"
-                                id="loginPassword"
-                                type="password"
-                                placeholder="Пароль"
-                            />
-                        </div>
-                        <p className="modal__text">
-                            Забыли пароль? {newPasswordButton}
-                        </p>
-                        <button className="modal__form-btn" type="submit" onClick={handleSubmit}>
-                            Войти
-                        </button>
-                    </form>
-                </Modal>
-                {newPasswordModal}
-            </>
-        )
-    }
+                    <div className="modal__input-box">
+                        <label htmlFor="loginPassword" className="label">
+                            Пароль
+                        </label>
+                        <input
+                            {...register('password')}
+                            onChange={e => setPassword(e.target.value)}
+                            value={password}
+                            className="input"
+                            id="loginPassword"
+                            type="password"
+                            placeholder="Пароль"
+                        />
+                        <p className="input__error-text">{errors.password?.message}</p>
+                    </div>
+                    <p className="modal__text">
+                        Забыли пароль?
+                    </p>
+                    <button className="modal__form-btn" type="submit">
+                        Войти
+                    </button>
+                </form>
+            </Modal>
+        </>
+    )
 }
 
 export default Login

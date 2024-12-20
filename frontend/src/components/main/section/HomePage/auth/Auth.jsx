@@ -5,6 +5,8 @@ import {Context} from "../../../../../api/store/storeContext.js";
 import { useForm } from 'react-hook-form';
 import {schema} from "./schema.js";
 import {yupResolver} from "@hookform/resolvers/yup";
+import Login from "./Login.jsx";
+import TwoFA from "./TwoFA.jsx";
 
 function Auth() {
     const {store} = useContext(Context);
@@ -27,11 +29,18 @@ function Auth() {
     const openFirstModal = () => {
         openModal("FirstModal");
     }
+    const openLoginModal = () => {
+        openModal("Login");
+    }
+
+    const openTwoFAModal = () => {
+        openModal("TwoFAModal");
+    }
 
     const submitForm = async (e) => {
         await store.registration(email, password, confirmPassword, e);
         await store.verification(email);
-        closeAllModals();
+        openTwoFAModal();
         reset();
     }
 
@@ -95,13 +104,15 @@ function Auth() {
                         <p className="input__error-text">{errors.confirmPassword?.message}</p>
                     </div>
                     <p className="modal__text">
-                        У вас уже есть аккаунт?
+                        У вас уже есть аккаунт? <button className="modal__text" type="button" onClick={openLoginModal}>Войти</button>
                     </p>
                     <button className="modal__form-btn" type="submit">
                         Зарегистрироваться
                     </button>
                 </form>
             </Modal>
+            <Login />
+            <TwoFA />
         </>
     )
 }
