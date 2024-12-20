@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 
 const regExpEmail = /^\S+@\S+\.\S+$/;
-const regExpPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+//const regExpPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 const commonPasswords = ['12345678', 'password', 'qwerty', 'abc123'];
 
 export const schema = yup.object().shape({
@@ -17,10 +17,7 @@ export const schema = yup.object().shape({
         .string()
         .required('Обязательное поле')
         .min(8, 'Пароль должен содержать минимум 8 символов')
-        .matches(
-            regExpPassword,
-            'Пароль должен содержать минимум одну заглавную букву, одну строчную, одну цифру и один специальный символ'
-        )
+        //.matches(regExpPassword, 'Пароль должен содержать минимум одну заглавную букву, одну строчную, одну цифру и один специальный символ')
         .notOneOf(commonPasswords, 'Этот пароль слишком простой. Пожалуйста, выберите другой пароль'),
 
     confirmPassword: yup
