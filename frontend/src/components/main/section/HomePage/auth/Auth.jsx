@@ -84,7 +84,7 @@ function Auth() {
                             Повторите пароль
                         </label>
                         <input
-                            {...register('password')}
+                            {...register('confirmPassword')}
                             onChange={e => setConfirmPassword(e.target.value)}
                             value={confirmPassword}
                             className="input"
