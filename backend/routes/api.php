@@ -21,7 +21,7 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 Route::controller(\App\Http\Controllers\PlayerController::class)
     ->prefix('search-players')
     ->group(function (){
-        Route::post('', [\App\Http\Controllers\PlayerController::class, 'search'])->middleware('auth:sanctum');
+        Route::post('', [\App\Http\Controllers\PlayerController::class, 'search']);
 });
 
 
