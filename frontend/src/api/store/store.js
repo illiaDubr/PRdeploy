@@ -32,8 +32,7 @@ export default class Store {
         this.isLoading = bool;
     }
 
-    async login(email, password, event) {
-        event.preventDefault();
+    async login(email, password) {
         console.log('Отправляемые данные:', { email, password });
         try {
             const response = await AuthService.login(email, password);
@@ -46,7 +45,7 @@ export default class Store {
         }
     }
 
-    async registration(email, password, password_confirmation, event) {
+    async registration(email, password, password_confirmation) {
         event.preventDefault();
         console.log('Отправляемые данные:', { email, password, password_confirmation });
         try {
