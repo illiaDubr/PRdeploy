@@ -61,8 +61,6 @@ function Auth() {
                             id="email"
                             type="email"
                             placeholder="Введите почту"
-                            required={true}
-                            autoComplete="email"
                         />
                         <p>{errors.email?.message}</p>
                     </div>
@@ -78,13 +76,11 @@ function Auth() {
                             id="password"
                             type="password"
                             placeholder="Пароль"
-                            required={true}
-                            autoComplete="new-password"
                         />
                         <p>{errors.password?.message}</p>
                     </div>
                     <div className="modal__input-box">
-                        <label htmlFor="password_confirmation" className="label">
+                        <label htmlFor="confirmPassword" className="label">
                             Повторите пароль
                         </label>
                         <input
@@ -92,13 +88,11 @@ function Auth() {
                             onChange={e => setConfirmPassword(e.target.value)}
                             value={confirmPassword}
                             className="input"
-                            id="password_confirmation"
+                            id="confirmPassword"
                             type="password"
                             placeholder="Пароль"
-                            required={true}
-                            autoComplete="new-password"
                         />
-                        <p>{errors.password?.message}</p>
+                        <p>{errors.confirmPassword?.message}</p>
                     </div>
                     <p className="modal__text">
                         У вас уже есть аккаунт?
