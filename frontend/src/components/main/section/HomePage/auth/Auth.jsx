@@ -48,7 +48,7 @@ function Auth() {
                         <IconSvg width="36" height="36" id="close-menu"/>
                     </button>
                 </div>
-                <form method="POST" className="modal__body" onSubmit={handleSubmit(submitForm)}>
+                <form method="POST" className="modal__body" onSubmit={handleSubmit(submitForm)} autoComplete="OFF">
                     <div className="modal__input-box">
                         <label htmlFor="email" className="label">
                             Почта
@@ -57,12 +57,12 @@ function Auth() {
                             {...register('email')}
                             onChange={e => setEmail(e.target.value)}
                             value={email}
-                            className="input"
+                            className={`input ${errors.email ? 'input__error' : ''}`}
                             id="email"
                             type="email"
                             placeholder="Введите почту"
                         />
-                        <p>{errors.email?.message}</p>
+                        <p className="input__error-text">{errors.email?.message}</p>
                     </div>
                     <div className="modal__input-box">
                         <label htmlFor="password" className="label">
@@ -72,12 +72,12 @@ function Auth() {
                             {...register('password')}
                             onChange={e => setPassword(e.target.value)}
                             value={password}
-                            className="input"
+                            className={`input ${errors.password ? 'input__error' : ''}`}
                             id="password"
                             type="password"
                             placeholder="Пароль"
                         />
-                        <p>{errors.password?.message}</p>
+                        <p className="input__error-text">{errors.password?.message}</p>
                     </div>
                     <div className="modal__input-box">
                         <label htmlFor="confirmPassword" className="label">
@@ -87,12 +87,12 @@ function Auth() {
                             {...register('confirmPassword')}
                             onChange={e => setConfirmPassword(e.target.value)}
                             value={confirmPassword}
-                            className="input"
+                            className={`input ${errors.confirmPassword ? 'input__error' : ''}`}
                             id="confirmPassword"
                             type="password"
                             placeholder="Пароль"
                         />
-                        <p>{errors.confirmPassword?.message}</p>
+                        <p className="input__error-text">{errors.confirmPassword?.message}</p>
                     </div>
                     <p className="modal__text">
                         У вас уже есть аккаунт?

@@ -134,6 +134,14 @@ body {
           &::placeholder {
             @include mixin.font-style(500, 14, 130, #565656)
           }
+
+          .input__error {
+
+          }
+
+          .input__error-text {
+
+          }
         }
       }
 
