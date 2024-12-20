@@ -2,7 +2,7 @@ import {useContext, useState} from 'react';
 import {Modal, useModal} from "../../../components/Modal.jsx";
 import IconSvg from "../../../components/IconSvg.jsx";
 import {Context} from "../../../../../api/store/storeContext.js";
-import {useForm, Controller} from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import {schema} from "./schema.js";
 import {yupResolver} from "@hookform/resolvers/yup";
 
@@ -16,7 +16,6 @@ function Auth() {
     const [confirmPassword, setConfirmPassword] = useState('');
 
     const {
-        control,
         register,
         handleSubmit,
         reset,
@@ -33,6 +32,7 @@ function Auth() {
         await store.registration(email, password, confirmPassword, e);
         await store.verification(email);
         closeAllModals();
+        reset();
     }
 
     return (
