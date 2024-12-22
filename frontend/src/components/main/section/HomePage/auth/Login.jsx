@@ -7,11 +7,12 @@ import {yupResolver} from "@hookform/resolvers/yup";
 import IconSvg from "../../../components/IconSvg.jsx";
 import {Context} from "../../../../../api/store/storeContext.js";
 import {ACCOUNT_ROUTE} from "../../../../../utils/const.js";
+import NewPassword from "./NewPassword.jsx";
 
 function Login() {
     const navigate = useNavigate();
 
-    const {closeAllModals} = useModal();
+    const {openModal, closeAllModals} = useModal();
 
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = useState('');
@@ -32,6 +33,10 @@ function Login() {
         navigate(ACCOUNT_ROUTE);
         closeAllModals();
         reset();
+    }
+
+    const openNewPasswordModal = () => {
+        openModal("NewPassword")
     }
 
     return (
@@ -75,13 +80,14 @@ function Login() {
                         <p className="input__error-text">{errors.password?.message}</p>
                     </div>
                     <p className="modal__text">
-                        Забыли пароль?
+                        Забыли пароль? <button className="modal__text" type="button" onClick={openNewPasswordModal}>Востановить</button>
                     </p>
                     <button className="modal__form-btn" type="submit">
-                        {isSubmitting ? 'Загрузка' : 'Войти'}
+                        {isSubmitting ? 'Загрузка...' : 'Войти'}
                     </button>
                 </form>
             </Modal>
+            <NewPassword />
         </>
     )
 }

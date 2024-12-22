@@ -21,7 +21,7 @@ function Auth() {
         register,
         handleSubmit,
         reset,
-        formState: {errors},
+        formState: {errors, isSubmitting},
     } = useForm({
         resolver: yupResolver(schemaAuth),
         mode: 'onChange',
@@ -108,7 +108,7 @@ function Auth() {
                         У вас уже есть аккаунт? <button className="modal__text" type="button" onClick={openLoginModal}>Войти</button>
                     </p>
                     <button className="modal__form-btn" type="submit">
-                        Зарегистрироваться
+                        {isSubmitting ? 'Регистрация...' : 'Зарегистрироваться'}
                     </button>
                 </form>
             </Modal>

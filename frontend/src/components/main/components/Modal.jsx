@@ -32,7 +32,7 @@ export const ModalProvider = ({ children }) => {
     }, [closeAllModals]);
 
     return (
-        <ModalContext.Provider value={{ activeModal, openModal, closeModal, closeAllModals, goBack }}>
+        <ModalContext.Provider value={{ activeModal, openModal, closeModal, closeAllModals, goBack, modalStack }}>
             {children}
         </ModalContext.Provider>
     );
@@ -41,7 +41,10 @@ export const ModalProvider = ({ children }) => {
 export const useModal = () => useContext(ModalContext);
 
 export const Modal = ({ modalName, children }) => {
-    const { activeModal, closeAllModals } = useModal();
+    const { activeModal, closeAllModals, modalStack } = useModal();
+
+    const isFirstModal = modalStack[0] === modalName;
+
     const isOpen = activeModal === modalName;
 
     const handleOverlayClick = (e) => {
@@ -50,7 +53,7 @@ export const Modal = ({ modalName, children }) => {
 
     return (
         <div
-            className={`modal ${isOpen ? "modal--visible" : "modal--hidden"}`}
+            className={`modal ${isOpen ? "modal--visible" : "modal--hidden"} ${isFirstModal ? "modal--first" : "modal--secondary"}`}
             onMouseUp={handleOverlayClick}
         >
             <div className="modal-content">{children}</div>
