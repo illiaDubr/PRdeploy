@@ -23,6 +23,7 @@ export default class AuthService {
     }
 
     static async logout() {
+        await this.getCsrfToken();
         return $api.post('/api/logout');
     }
 

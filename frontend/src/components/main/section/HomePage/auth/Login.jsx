@@ -30,6 +30,7 @@ function Login() {
     const submitForm = async () => {
         await store.login(email, password);
         navigate(ACCOUNT_ROUTE);
+        closeAllModals();
         reset();
     }
 
