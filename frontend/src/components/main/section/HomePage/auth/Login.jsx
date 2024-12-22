@@ -21,7 +21,7 @@ function Login() {
         register,
         handleSubmit,
         reset,
-        formState: {errors},
+        formState: {errors, isSubmitting},
     } = useForm({
         resolver: yupResolver(schemaLogin),
         mode: 'onChange',
@@ -78,7 +78,7 @@ function Login() {
                         Забыли пароль?
                     </p>
                     <button className="modal__form-btn" type="submit">
-                        Войти
+                        {isSubmitting ? 'Загрузка' : 'Войти'}
                     </button>
                 </form>
             </Modal>
