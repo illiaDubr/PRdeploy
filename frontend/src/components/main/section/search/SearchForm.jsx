@@ -41,15 +41,13 @@ const SearchForm = () => {
     const submitForm = async (formData) => {
         if (!formData.last_name && !formData.discord && !formData.nickname) {
             const errorMessage = 'Заполните хотя бы одно из полей: Фамилия, Discord или Ник в руме';
-
-            // Устанавливаем ошибку на все три поля
             setError('last_name', { type: 'manual', message: errorMessage });
             setError('discord', { type: 'manual', message: errorMessage });
             setError('nickname', { type: 'manual', message: errorMessage });
             return;
         }
 
-        await store.search(SearchData);
+        await store.search(formData);
         console.log(formData);
         reset()
     }
