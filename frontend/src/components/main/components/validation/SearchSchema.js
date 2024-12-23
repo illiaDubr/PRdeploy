@@ -7,14 +7,4 @@ export const SearchSchema = yup.object().shape({
     discord: yup.string(),
     Email: yup.string().email('Неверный email'),
     nickname: yup.string(),
-}).test(
-    'at-least-one',
-    'Заполните хотя бы одно из полей: Фамилия, Discord или Ник в руме',
-    (values) => {
-        return (
-            values.last_name ||
-            values.discord ||
-            values.nickname
-        );
-    }
-);
+});

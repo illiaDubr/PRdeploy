@@ -17,28 +17,44 @@ const SearchForm = () => {
         setFormData((prevData) => ({...prevData, phonenumber: phoneNumber}));
     }, []);
 
-    const handleChange = (e) => {
-        const {name, value} = e.target;
-        setFormData({
-            ...formData,
-            [name]: value
-        });
-    };
-
     const {
         register,
         handleSubmit,
         reset,
-        formState: {errors, isSubmitting},
+        setValue,
+        setError,
+        formState: { errors, isSubmitting },
     } = useForm({
         resolver: yupResolver(SearchSchema),
         mode: 'onChange',
     });
 
-    const submitForm = async () => {
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value,
+        });
+        setValue(name, value);  // Синхронизируем с react-hook-form
+    };
+
+    const submitForm = async (formData) => {
+        if (!formData.last_name && !formData.discord && !formData.nickname) {
+            const errorMessage = 'Заполните хотя бы одно из полей: Фамилия, Discord или Ник в руме';
+
+            // Устанавливаем ошибку на все три поля
+            setError('last_name', { type: 'manual', message: errorMessage });
+            setError('discord', { type: 'manual', message: errorMessage });
+            setError('nickname', { type: 'manual', message: errorMessage });
+            return;
+        }
+
         await store.search(SearchData);
         console.log(formData);
+        reset()
     }
+
+    console.log(errors);
 
     return (
         <form method="POST" className="search__wrapper" autoComplete="off" onSubmit={handleSubmit(submitForm)}>
@@ -49,9 +65,9 @@ const SearchForm = () => {
                             {field.label}
                         </label>
                         <input
+                            {...register(field.name)}
                             onChange={handleChange}
                             value={formData[field.name] || ''}
-                            {...register(field.name)}
                             className="search__input"
                             id={field.id}
                             type="text"
@@ -60,7 +76,7 @@ const SearchForm = () => {
                         />
                         {errors[field.name] && (
                             <span className="search__error-message" aria-live="polite">
-                                {errors[field.name].message}
+                                {errors[field.name]?.message}
                             </span>
                         )}
                     </div>
@@ -73,15 +89,20 @@ const SearchForm = () => {
                             {field.label}
                         </label>
                         <input
+                            {...register(field.name)}
                             onChange={handleChange}
                             value={formData[field.name] || ''}
-                            {...register(field.name)}
                             className="search__input"
                             id={field.id}
                             type="text"
                             name={field.name}
                             placeholder={field.placeholder}
                         />
+                        {errors[field.name] && (
+                            <span className="search__error-message" aria-live="polite">
+                                {errors[field.name]?.message}
+                            </span>
+                        )}
                     </div>
                 ))}
                 <CountrySelect onPhoneNumberChange={handlePhoneNumberChange}/>
