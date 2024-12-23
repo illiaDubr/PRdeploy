@@ -80,7 +80,7 @@ function Login() {
                         <p className="input__error-text">{errors.password?.message}</p>
                     </div>
                     <p className="modal__text">
-                        Забыли пароль? <button className="modal__text" type="button" onClick={openNewPasswordModal}>Востановить</button>
+                        Забыли пароль?{/* <button className="modal__text" type="button" onClick={openNewPasswordModal}>Востановить</button>*/}
                     </p>
                     <button className="modal__form-btn" type="submit">
                         {isSubmitting ? 'Загрузка...' : 'Войти'}
