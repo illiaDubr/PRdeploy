@@ -6,8 +6,8 @@ const SearchForm = ({ setSearchResults, setIsLoading }) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [errors, setErrors] = useState({});
     const [formData, setFormData] = useState({
-        surname: "",
-        name: "",
+        last_name: "",
+        first_name: "",
         middle_name: "",
         discord: "",
         Email: "",
@@ -16,8 +16,8 @@ const SearchForm = ({ setSearchResults, setIsLoading }) => {
     });
 
     const fields = [
-        { label: "Фамилия", id: "surname", name: "surname", placeholder: "Введите фамилию" },
-        { label: "Имя", id: "name", name: "name", placeholder: "Введите имя" },
+        { label: "Фамилия", id: "surname", name: "last_name", placeholder: "Введите фамилию" },
+        { label: "Имя", id: "name", name: "first_name", placeholder: "Введите имя" },
         { label: "Отчество", id: "middle_name", name: "middle_name", placeholder: "Введите отчество" },
         { label: "Discord", id: "discord", name: "discord", placeholder: "Введите ник игрока" },
         { label: "Почта", id: "Email", name: "Email", placeholder: "Введите почту игрока" },
