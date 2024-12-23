@@ -13,10 +13,12 @@ const SearchTable = observer(() => {
 
     if (isLoading) {
         content = <TableLoader />;
-    } else if (results.length === 0) {
+    } else if (!Array.isArray(results) || results.length === 0) {
         content = (
             <TableWarning id="notification">
-                Данные отсутствуют
+                {Array.isArray(results) && results.length === 0
+                    ? <div className="">Данные отсутствуют</div>
+                    : "Пользователь не найден"}
             </TableWarning>
         );
     } else {
