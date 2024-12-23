@@ -16,6 +16,6 @@ export default class SearchService {
     static async search() {
         await this.getCsrfToken();
 
-        return $api('/api/search-players', SearchData);
+        return $api.post('/api/search-players', SearchData);
     }
 }
