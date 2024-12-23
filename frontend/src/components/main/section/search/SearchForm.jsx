@@ -64,22 +64,10 @@ const SearchForm = ({ setSearchResults, setIsLoading }) => {
         return Object.keys(newErrors).length === 0;
     }, [formData]);
 
-    const getErrorMessage = (fieldName) => {
-        switch (fieldName) {
-            case "surname":
-                return "Фамилия обязательна, если другие поля пусты.";
-            case "discord":
-                return "Введите Discord, если другие поля пусты.";
-            case "nickname":
-                return "Ник в руме обязателен, если другие поля пусты.";
-            default:
-                return "Это поле обязательно.";
-        }
-    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!validateFields()) return;
+
 
         setIsSubmitting(true);
         setIsLoading(true);
@@ -115,7 +103,7 @@ const SearchForm = ({ setSearchResults, setIsLoading }) => {
                 />
                 {errors[name] && (
                     <span className="search__error-message" aria-live="polite">
-                        {getErrorMessage(name)}
+
                     </span>
                 )}
             </div>
