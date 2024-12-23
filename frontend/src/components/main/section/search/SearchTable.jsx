@@ -1,25 +1,23 @@
 import React from "react";
 import TableLoader from "./TableLoader.jsx";
 import TableWarning from "./TableWarning.jsx";
-import { observer } from "mobx-react-lite";
+import {observer} from "mobx-react-lite";
 import {Context} from "../../../../api/store/storeContext.js";
 
 
 const SearchTable = observer(() => {
     const {store} = React.useContext(Context);
-    const { results, isLoading } = store;
+    const {results, isLoading} = store;
 
     let content;
 
     if (isLoading) {
-        content = <TableLoader />;
+        content = <TableLoader/>;
     } else if (!Array.isArray(results) || results.length === 0) {
-        content = (
-            <TableWarning id="notification">
-                {Array.isArray(results) && results.length === 0
-                    ? <div className="">Данные отсутствуют</div>
-                    : "Пользователь не найден"}
-            </TableWarning>
+        content = Array.isArray(results) && results.length === 0 ? (
+            <TableWarning id="notification">Для отображения результата поиска заполните поля</TableWarning>
+        ) : (
+            <TableWarning id="red_notification">Данные отсутствуют</TableWarning>
         );
     } else {
         content = (
@@ -53,7 +51,7 @@ const SearchTable = observer(() => {
     }
 
     return (
-        <div className="table__container" >
+        <div className="table__container">
             {content}
         </div>
     );
