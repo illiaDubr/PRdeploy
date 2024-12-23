@@ -2,9 +2,10 @@ import React from "react";
 import {SearchFields} from "../../../../utils/SearchData.js";
 import {SearchData} from "../../../../utils/SearchData.js";
 import {useForm} from 'react-hook-form';
-//import {yupResolver} from "@hookform/resolvers/yup";
+import {yupResolver} from "@hookform/resolvers/yup";
 import {Context} from "../../../../api/store/storeContext.js";
 import CountrySelect from "./CountrySelect.jsx";
+import {SearchSchema} from "../../components/validation/SearchSchema.js";
 
 const SearchForm = () => {
     const {store} = React.useContext(Context);
@@ -13,11 +14,11 @@ const SearchForm = () => {
     const bottomFields = SearchFields.slice(3);
 
     const handlePhoneNumberChange = React.useCallback((phoneNumber) => {
-        setFormData((prevData) => ({ ...prevData, phonenumber: phoneNumber }));
+        setFormData((prevData) => ({...prevData, phonenumber: phoneNumber}));
     }, []);
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const {name, value} = e.target;
         setFormData({
             ...formData,
             [name]: value
@@ -30,7 +31,7 @@ const SearchForm = () => {
         reset,
         formState: {errors, isSubmitting},
     } = useForm({
-        //resolver: yupResolver(schemaLogin),
+        resolver: yupResolver(SearchSchema),
         mode: 'onChange',
     });
 
@@ -50,12 +51,18 @@ const SearchForm = () => {
                         <input
                             onChange={handleChange}
                             value={formData[field.name] || ''}
+                            {...register(field.name)}
                             className="search__input"
                             id={field.id}
                             type="text"
                             name={field.name}
                             placeholder={field.placeholder}
                         />
+                        {errors[field.name] && (
+                            <span className="search__error-message" aria-live="polite">
+                                {errors[field.name].message}
+                            </span>
+                        )}
                     </div>
                 ))}
             </div>
@@ -68,6 +75,7 @@ const SearchForm = () => {
                         <input
                             onChange={handleChange}
                             value={formData[field.name] || ''}
+                            {...register(field.name)}
                             className="search__input"
                             id={field.id}
                             type="text"
