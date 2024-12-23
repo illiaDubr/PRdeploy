@@ -2,6 +2,7 @@ import AuthService from "../services/AuthService.js";
 import { makeAutoObservable } from "mobx";
 import axios from "axios";
 import { API_URl } from "../http/index.js";
+import SearchService from "../services/SearchService.js";
 
 export default class Store {
     user = {}
@@ -90,6 +91,14 @@ export default class Store {
             console.log(response);
         } catch (e) {
             console.log(e.response?.data?.message);
+        }
+    }
+
+    async search() {
+        try {
+            await SearchService.search();
+        } catch (e) {
+            console.log(e);
         }
     }
 }

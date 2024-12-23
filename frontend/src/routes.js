@@ -5,12 +5,12 @@ import Search from "./pages/platform/search/Search.jsx";
 
 export const authRoutes = [
     {
-        path: SEARCH_ROUTE,
-        Component: Search
-    },
-    {
         path: ACCOUNT_ROUTE,
         Component: PersonalAccount
+    },
+    {
+        path: SEARCH_ROUTE,
+        Component: Search
     },
 ]
 
