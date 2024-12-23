@@ -6,6 +6,7 @@ import SearchService from "../services/SearchService.js";
 
 export default class Store {
     user = {}
+    results = [];
     isAuth = false;
     isLoading = false;
 
@@ -31,6 +32,10 @@ export default class Store {
 
     setLoading(bool) {
         this.isLoading = bool;
+    }
+
+    setResults(results) {
+        this.results = results;
     }
 
     async login(email, password) {
@@ -95,11 +100,16 @@ export default class Store {
     }
 
     async search(formData) {
+        this.setLoading(true);
         try {
             const response = await SearchService.search(formData);
-            console.log(response);
+            this.setResults(response.data);
+            console.log(response.data);
         } catch (e) {
             console.log(e);
+            this.setResults([]);
+        } finally {
+            this.setLoading(false);
         }
     }
 }

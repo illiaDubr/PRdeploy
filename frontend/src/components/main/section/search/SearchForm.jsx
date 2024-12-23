@@ -23,7 +23,7 @@ const SearchForm = () => {
         reset,
         setValue,
         setError,
-        formState: { errors, isSubmitting },
+        formState: { errors,isSubmitting },
     } = useForm({
         resolver: yupResolver(SearchSchema),
         mode: 'onChange',
@@ -35,7 +35,7 @@ const SearchForm = () => {
             ...formData,
             [name]: value,
         });
-        setValue(name, value);  // Синхронизируем с react-hook-form
+        setValue(name, value);
     };
 
     const submitForm = async (formData) => {
