@@ -1,3 +1,5 @@
+import React from "react";
+
 export const SearchData = {
     last_name: "",
     first_name: "",
@@ -6,6 +8,12 @@ export const SearchData = {
     Email: "",
     nickname: "",
     phonenumber: "",
+};
+
+export const useSearchFormData = () => {
+    const [formData, setFormData] = React.useState(SearchData);
+
+    return [formData, setFormData];
 };
 
 export const SearchFields = [

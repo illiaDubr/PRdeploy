@@ -1,6 +1,6 @@
 import React from "react";
 import {SearchFields} from "../../../../utils/SearchData.js";
-import {SearchData} from "../../../../utils/SearchData.js";
+import {useSearchFormData} from "../../../../utils/SearchData.js";
 import {useForm} from 'react-hook-form';
 import {yupResolver} from "@hookform/resolvers/yup";
 import {Context} from "../../../../api/store/storeContext.js";
@@ -9,13 +9,13 @@ import {SearchSchema} from "../../components/validation/SearchSchema.js";
 
 const SearchForm = () => {
     const {store} = React.useContext(Context);
-    const [formData, setFormData] = React.useState(SearchData);
+    const [formData, setFormData] = useSearchFormData();
     const topFields = SearchFields.slice(0, 3);
     const bottomFields = SearchFields.slice(3);
 
     const handlePhoneNumberChange = React.useCallback((phoneNumber) => {
         setFormData((prevData) => ({...prevData, phonenumber: phoneNumber}));
-    }, []);
+    }, [setFormData]);
 
     const {
         register,

@@ -1,5 +1,4 @@
 import $api from "../http/index.js"
-import { SearchData } from "../../utils/SearchData.js";
 
 
 export default class SearchService {
@@ -13,9 +12,9 @@ export default class SearchService {
         }
     }
 
-    static async search() {
+    static async search(formData) {
         await this.getCsrfToken();
 
-        return $api.post('/api/search-players', SearchData);
+        return $api.post('/api/search-players', formData);
     }
 }
