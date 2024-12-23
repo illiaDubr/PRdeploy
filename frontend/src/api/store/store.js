@@ -96,7 +96,8 @@ export default class Store {
 
     async search() {
         try {
-            await SearchService.search();
+            const response = await SearchService.search();
+            console.log(response);
         } catch (e) {
             console.log(e);
         }
