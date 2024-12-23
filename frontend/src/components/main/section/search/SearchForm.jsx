@@ -52,7 +52,7 @@ const SearchForm = () => {
         reset()
     }
 
-    console.log(errors);
+    console.log(formData);
 
     return (
         <form method="POST" className="search__wrapper" autoComplete="off" onSubmit={handleSubmit(submitForm)}>
