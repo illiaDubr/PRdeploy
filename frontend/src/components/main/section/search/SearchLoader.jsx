@@ -2,12 +2,12 @@ import React from 'react';
 //import Video from "../../../../assets/video/video.js";
 
 
-const TableLoader = () => {
+const SearchLoader = () => {
     return (
-        <div className="table__loader">
+        <div className="result__loader">
             {/* <img className="loader" src={Video.loader} alt="video" />*/}
         </div>
     )
 }
 
-export default TableLoader;
+export default SearchLoader;
