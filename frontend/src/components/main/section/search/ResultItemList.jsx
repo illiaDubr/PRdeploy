@@ -1,4 +1,3 @@
-import IconSvg from "../../components/IconSvg.jsx";
 import ResultTextItem from "./ResultTextItem.jsx";
 import FilteredFunds from "./FilteredFunds.jsx";
 
@@ -68,15 +67,15 @@ const ResultItemList = ({results}) => {
                             {item.created_at}
                         </div>
                         <div className="result__info">
-                            <ResultItemList
+                            <ResultTextItem
                                 label="Период нахождения в фонде:"
                             />
-                            <ResultItemList
+                            <ResultTextItem
                                 label="Комментарий от фонда о причинах ухода игрока:"
                                 content={item.descr}
                             />
-                            <ResultItemList
-                                label="  Сумма ущерба:"
+                            <ResultTextItem
+                                label="Сумма ущерба:"
                                 content={item.amount}
                             />
                             {/*<div className="result__text result__text-1">
