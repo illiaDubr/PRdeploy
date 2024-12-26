@@ -13,18 +13,22 @@ return new class extends Migration
     {
         Schema::create('reputation_records', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('player_id')->nullable();
-            $table->unsignedBigInteger('backer_id')->nullable();
+            $table->unsignedBigInteger('player_id')->nullable(); // Связь с игроком
+            $table->unsignedBigInteger('backer_id')->nullable(); // Связь с фондом
+            $table->string('old_player_id')->nullable();
+            $table->string('old_backer_id')->nullable();
 
-            $table->text('comment')->nullable();
-            $table->string('source')->nullable();
+            $table->text('comment')->nullable(); // Текст комментария
+            $table->text('arbitrage_descr')->nullable(); // Описание арбитража
+            $table->string('amount')->nullable(); // Сумма в арбитраже
+            $table->string('source')->nullable(); // Источник информации
+
             $table->timestamps();
 
             $table->foreign('player_id')->references('player_id')->on('players')->onDelete('cascade');
             $table->foreign('backer_id')->references('backer_id')->on('backers')->onDelete('cascade');
         });
     }
-
 
     /**
      * Reverse the migrations.

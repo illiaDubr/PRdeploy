@@ -23,6 +23,6 @@ class Player extends Model
         'nickPokerstars', 'nick888poker', 'nickWPNpoker', 'nickStretchpoker',
         'nickCoinpoker', 'nickchikoPoker', 'nickiPoker', 'Skrill', 'Neteller',
         'GipsyTeam', 'Luxon', 'telegram', 'discord', 'phonenumber',
-        'kyc_status', 'kyc_verified_at', 'created_by'
+        'kyc_status', 'kyc_verified_at', 'created_by', 'updated_by', 'old_id', 'descr', 'amount', 'fund_name',
     ];
 }

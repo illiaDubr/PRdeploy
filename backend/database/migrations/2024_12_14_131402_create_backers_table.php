@@ -13,18 +13,21 @@ return new class extends Migration
     {
         Schema::create('backers', function (Blueprint $table) {
             $table->id('backer_id');
-            $table->unsignedBigInteger('user_id')->unique()->index();
+            $table->unsignedBigInteger('user_id')->nullable()->index(); // Связь с пользователем (если есть)
+            $table->string('old_backer', 255)->nullable()->unique();
 
-            $table->string('first_name')->nullable();
-            $table->string('last_name')->nullable();
-            $table->string('middle_name')->nullable();
+            $table->string('name'); // Название фонда
+            $table->json('managers')->nullable(); // Список менеджеров
+            $table->json('users')->nullable(); // Список пользователей
+            $table->json('readonlys')->nullable(); // Список readonly-пользователей
+
             $table->string('email')->nullable()->index();
-
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
         });
     }
+
     /**
      * Reverse the migrations.
      */

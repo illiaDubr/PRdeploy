@@ -1,4 +1,4 @@
-    <?php
+<?php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('players', function (Blueprint $table) {
             $table->id('player_id');
-            $table->unsignedBigInteger('user_id')->unique()->index();
+            $table->unsignedBigInteger('user_id')->nullable();
+
+            $table->string('old_id')->nullable()->unique();
 
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('middle_name')->nullable();
-            $table->string('email')->nullable()->index();
+            $table->string('email')->nullable();
             $table->string('phonenumber')->nullable();
             $table->string(column: 'nickPS')->nullable();
             $table->string(column: 'nickGG')->nullable();
@@ -39,6 +41,10 @@ return new class extends Migration
             $table->string('telegram')->nullable();
             $table->string('discord')->nullable();
 
+            $table->text('descr')->nullable(); // Описание из case
+            $table->string('amount')->nullable(); // Сумма из case
+            $table->string('fund_name')->nullable(); // Имя фонда
+
             $table->boolean('kyc_status')->default(false);
             $table->timestamp('kyc_verified_at')->nullable();
 
@@ -50,7 +56,6 @@ return new class extends Migration
             $table->foreign('created_by')->references('id')->on('users')->onDelete('set null');
         });
     }
-
 
     /**
      * Reverse the migrations.
