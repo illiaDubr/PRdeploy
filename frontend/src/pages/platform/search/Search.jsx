@@ -69,10 +69,6 @@ function Search() {
                                     </div>
                                     fwekfjnwef
                                 </div>
-                                <button className={`result__btn ${resultInfo ? "result__btn-active" : ""}`} type="button" onClick={toggleClass}>
-                                    Показать еще
-                                    <IconSvg width={20} height={20} id="arrow"/>
-                                </button>
                             </div>
                             <div className={`result__info ${resultInfo ? "result__info-active" : "result__info-close"}`}>
                                 <div className="result__text">
@@ -98,6 +94,11 @@ function Search() {
                                     fwekfjnwef
                                 </div>
                             </div>
+                            <button className={`result__btn ${resultInfo ? "result__btn-active" : ""}`} type="button"
+                                    onClick={toggleClass}>
+                                Показать еще
+                                <IconSvg width={20} height={20} id="arrow"/>
+                            </button>
                         </div>
                         <div className="result result-right">
                             <div className="result__title">
