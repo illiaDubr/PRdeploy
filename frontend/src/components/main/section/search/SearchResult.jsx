@@ -3,7 +3,7 @@ import SearchLoader from "./SearchLoader.jsx";
 import SearchWarning from "./SearchWarning.jsx";
 import {observer} from "mobx-react-lite";
 import {Context} from "../../../../api/store/storeContext.js";
-import ResultItemList from "./ResultItemList.jsx";
+import ResultItems from "./ResultItems.jsx";
 
 
 const SearchResult = observer(() => {
@@ -22,7 +22,7 @@ const SearchResult = observer(() => {
         );
     } else {
         content = (
-            <ResultItemList results={results} />
+            <ResultItems />
         );
     }
 
