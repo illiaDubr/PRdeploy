@@ -96,7 +96,7 @@ function Search() {
                             </div>
                             <button className={`result__btn ${resultInfo ? "result__btn-active" : ""}`} type="button"
                                     onClick={toggleClass}>
-                                Показать еще
+                                {`${resultInfo ? "Свернуть" : "Показать еще"}`}
                                 <IconSvg width={20} height={20} id="arrow"/>
                             </button>
                         </div>
