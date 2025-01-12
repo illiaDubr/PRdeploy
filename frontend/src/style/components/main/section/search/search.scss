@@ -326,6 +326,11 @@
                 border: 1px solid red;
               }
             }
+
+            .result__content {
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
           }
         }
 

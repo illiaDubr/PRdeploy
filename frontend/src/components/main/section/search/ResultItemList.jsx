@@ -17,7 +17,7 @@ const ResultItemList = ({results}) => {
                     <div className="result__box" key={item.id}>
                         <div className="result result-left">
                             <div className="result__title">
-                                {item.first_name}
+                                {item.first_name || "—"}
                             </div>
                             <div className="result__info">
                                 <ResultItem content={item.phonenumber} iconId="search__phone"/>
@@ -33,6 +33,16 @@ const ResultItemList = ({results}) => {
                             </button>
                         </div>
                         <div className="result result-right">
+                            <div className="result__title">
+                                <div className="result__author">
+                                    {item.author || "—"}
+                                </div>
+                                <div className="result__info">
+                                    запись от
+                                    <br/>
+                                    {item.created_at || "—"}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 ))
