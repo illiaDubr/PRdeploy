@@ -11,7 +11,7 @@ const ResultItem = ({content, iconId, label, hideIcon}) => {
                         <span></span>
                     )
                 ) : null}
-                {label && {label}}
+                {label && <span>{label}</span>}
             </div>
             {content || "—"}
         </div>
