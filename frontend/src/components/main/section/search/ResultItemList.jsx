@@ -51,7 +51,7 @@ const ResultItemList = ({results}) => {
                                     <div className="result__author">
                                         {item.fund_name || "—"}
                                     </div>
-                                    <div className="result__info">
+                                    <div className="">
                                         Запись от
                                         <br/>
                                         {item.created_at ? item.created_at.slice(0, 10) : "-"}

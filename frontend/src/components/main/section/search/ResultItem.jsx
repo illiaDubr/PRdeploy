@@ -3,9 +3,19 @@ import IconSvg from "../../components/IconSvg.jsx";
 import { Tooltip } from 'react-tooltip'
 import 'react-tooltip/dist/react-tooltip.css'
 
+const getRandomColor = () => {
+    const letters = "0123456789ABCDEF";
+    let color = "#";
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+};
+
 const ResultItem = ({content, iconId, label, hideIcon}) => {
     const contentRef = React.useRef(null);
     const [isOverflowing, setIsOverflowing] = React.useState(false);
+    const [randomBorderColor, setRandomBorderColor] = React.useState(getRandomColor());
 
     React.useEffect(() => {
         if (contentRef.current) {
@@ -14,6 +24,10 @@ const ResultItem = ({content, iconId, label, hideIcon}) => {
         }
     }, [content]);
 
+    React.useEffect(() => {
+        setRandomBorderColor(getRandomColor());
+    }, []);
+
     return (
         <div className="result__text">
             <div className="result__head">
@@ -21,7 +35,7 @@ const ResultItem = ({content, iconId, label, hideIcon}) => {
                     iconId ? (
                         <IconSvg width={20} height={20} id={iconId} />
                     ) : (
-                        <span></span>
+                        <span style={{borderColor: `${randomBorderColor}`}}></span>
                     )
                 ) : null}
                 {label && <div>{label}</div>}
