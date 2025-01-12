@@ -311,7 +311,7 @@
             align-items: center;
             gap: 12px;
             border-bottom: 1px solid #121317;
-            padding: 4px 0px;
+            padding: 4px 5px 4px 0px;
             @include mixin.font-style(400, 16, 130, #FFFFFF);
 
             .result__head {

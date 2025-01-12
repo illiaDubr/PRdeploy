@@ -35,13 +35,20 @@ const ResultItemList = ({results}) => {
                         <div className="result result-right">
                             <div className="result__title">
                                 <div className="result__author">
-                                    {item.author || "—"}
+                                    {item.fund_name || "—"}
                                 </div>
                                 <div className="result__info">
                                     запись от
                                     <br/>
                                     {item.created_at || "—"}
                                 </div>
+                            </div>
+                            <div className="result__info">
+                                <ResultItem content={item.comment} label="Комментарий от фонда:" />
+                                <ResultItem content={item.amount} label="Сумма ущерба:" />
+                            </div>
+                            <div className="result__user-status">
+                                {item.backer_tag}
                             </div>
                         </div>
                     </div>
