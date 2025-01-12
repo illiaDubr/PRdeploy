@@ -56,13 +56,13 @@ const ResultItemList = ({results}) => {
                                         <br/>
                                         {item.created_at ? item.created_at.slice(0, 10) : "-"}
                                     </div>
+                                    <div className={`result__user-status result__user-status--${color}`}>
+                                        {text}
+                                    </div>
                                 </div>
                                 <div className="result__info">
                                     <ResultItem content={item.comment} label="Комментарий от фонда:"/>
                                     <ResultItem content={item.amount} label="Сумма ущерба:"/>
-                                </div>
-                                <div className={`result__user-status result__user-status--${color}`}>
-                                    {text}
                                 </div>
                             </div>
                         </div>
