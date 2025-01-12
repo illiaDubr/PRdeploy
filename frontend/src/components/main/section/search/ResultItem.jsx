@@ -29,7 +29,7 @@ const ResultItem = ({content, iconId, label, hideIcon}) => {
             <div className="result__content" ref={contentRef} data-tooltip-id={isOverflowing ? "tooltip" : undefined} data-tooltip-content={isOverflowing ? content : undefined}>
                 {content || "—"}
             </div>
-            <Tooltip id="tooltip" place="top" isInteractive={true}/>
+            <Tooltip id="tooltip" place="top" clickable={true}/>
         </div>
     )
 }

@@ -40,7 +40,7 @@ const ResultItemList = ({results}) => {
                                 <div className="result__info">
                                     запись от
                                     <br/>
-                                    {item.created_at || "—"}
+                                    {item.created_at ? item.created_at.slice(0, 10) : "-"}
                                 </div>
                             </div>
                             <div className="result__info">

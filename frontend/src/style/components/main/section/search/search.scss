@@ -372,7 +372,7 @@
         flex-direction: row;
 
         .result__title {
-          min-width: 71px;
+          max-width: 110px;
           @include mixin.font-style(500, 14, 130, #FFFFFF);
           text-align: center;
         }
