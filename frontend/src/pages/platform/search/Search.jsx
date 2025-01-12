@@ -110,6 +110,9 @@ function Search() {
                                     <br/>
                                     29.03.2013
                                 </div>
+                                <div className="result__user-status">
+                                    Нарушитель
+                                </div>
                             </div>
                             <div className="result__info">
                                 <div className="result__text">
@@ -126,9 +129,6 @@ function Search() {
                                     </span>
                                     &nbsp;1000$
                                 </div>
-                            </div>
-                            <div className="result__user-status">
-                                Нарушитель
                             </div>
                         </div>
                     </div>

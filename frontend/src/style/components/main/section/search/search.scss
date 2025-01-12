@@ -372,9 +372,44 @@
         flex-direction: row;
 
         .result__title {
-          max-width: 110px;
+          max-width: 130px;
+          height: fit-content;
+          display: flex;
+          align-items: center;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 10px;
           @include mixin.font-style(500, 14, 130, #FFFFFF);
           text-align: center;
+
+          .result__user-status {
+            border-radius: 100px;
+            padding: 4px 16px;
+            @include mixin.font-style(500, 14, 143, #121317);
+          }
+
+          .result__user-status--red {
+            background-color: #f8d7da;
+          }
+
+          /* Цвет для "Покинул покер" */
+          .result__user-status--orange {
+            background-color: #ffe5b4;
+          }
+
+          /* Цвет для "Погашает долг" */
+          .result__user-status--yellow {
+            background-color: #fff3cd;
+          }
+
+          /* Цвет для "Вопрос закрыт" */
+          .result__user-status--green {
+            background-color: #d4edda;
+          }
+
+          .result__user-status--gray {
+            background-color: #e2e3e5;
+          }
         }
 
         .result__info {
@@ -391,15 +426,6 @@
               @include mixin.font-style(600, 18, 130, #FFFFFF);
             }
           }
-        }
-
-        .result__user-status {
-          position: absolute;
-          right: 0;
-          background: #f79e1b;
-          border-radius: 100px;
-          padding: 4px 16px;
-          @include mixin.font-style(500, 14, 143, #121317);
         }
       }
     }
@@ -479,6 +505,10 @@
         .result-right {
           align-items: flex-start;
           flex-direction: column;
+
+          .result__title {
+            max-width: 100%;
+          }
         }
       }
     }
