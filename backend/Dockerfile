@@ -1,13 +1,14 @@
 FROM php:8.2-fpm
 
 # Установка необходимых пакетов и зависимостей
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     libzip-dev \
     zip \
     unzip \
     git \
-    php-xml && \
-    docker-php-ext-install pdo pdo_mysql
+    php8.2-xml && \
+    docker-php-ext-install pdo pdo_mysql && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 
 # Установка Composer
