@@ -5,9 +5,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libzip-dev \
     zip \
     unzip \
-    git \
-    php8.2-xml && \
-    docker-php-ext-install pdo pdo_mysql && \
+    git && \
+    docker-php-ext-install pdo pdo_mysql dom && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 
