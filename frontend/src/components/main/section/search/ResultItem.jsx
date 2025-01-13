@@ -38,7 +38,7 @@ const ResultItem = ({content, iconId, label, hideIcon}) => {
                         <span style={{borderColor: `${randomBorderColor}`}}></span>
                     )
                 ) : null}
-                {label && <div>{label}</div>}
+                {label && <div className={"result__label"}>{label}</div>}
             </div>
             <div className="result__content" ref={contentRef} data-tooltip-id={isOverflowing ? "tooltip" : undefined} data-tooltip-content={isOverflowing ? content : undefined}>
                 {content || "—"}
