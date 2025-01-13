@@ -35,26 +35,26 @@ const ResultItemList = ({results}) => {
                                     <ResultItem content={item.phonenumber} iconId="search__phone"/>
                                     <ResultItem content={item.email} iconId="search__mail"/>
                                     <ResultItem content={item.discord} iconId="search__mail" label="Discord:"/>
-                                    <ResultItem content={item.nickchikoPoker} label="СhikoPoker:" hideIcon={true}/>
-                                    <ResultItem content={item.Ggpokerok} label="GgPokerok:" hideIcon={true}/>
-                                    <ResultItem content={item.Ggnetwork} label="GgNetwork:" hideIcon={true}/>
+                                    <ResultItem content={item.nickchikoPoker} label="СhikoPoker:"/>
+                                    <ResultItem content={item.Ggpokerok} label="GgPokerok:"/>
+                                    <ResultItem content={item.Ggnetwork} label="GgNetwork:"/>
                                 </div>
                                 <div className={`result__info ${resultInfo ? "result__info-active" : "result__info-close"}`}>
-                                    <ResultItem content={item.Pokerstars_com} label="PokerStars.com:" hideIcon={true}/>
-                                    <ResultItem content={item.Pokersters_es} label="PokerSters.es:" hideIcon={true}/>
-                                    <ResultItem content={item.Winamax_fr} label="Winamax:" hideIcon={true}/>
-                                    <ResultItem content={item.nickPS} label="PS:" hideIcon={true}/>
-                                    <ResultItem content={item.nickGG} label="GG:" hideIcon={true}/>
-                                    <ResultItem content={item.nickRedStar} label="RedStar:" hideIcon={true}/>
-                                    <ResultItem content={item.nickRedStar} label="RedStar:" hideIcon={true}/>
-                                    <ResultItem content={item.nickTigerGaming} label="TigerGaming:" hideIcon={true}/>
-                                    <ResultItem content={item.nickPartyPoker} label="PartyPoker:" hideIcon={true}/>
-                                    <ResultItem content={item.nickPokerstars} label="Pokerstars:" hideIcon={true}/>
-                                    <ResultItem content={item.nick888poker} label="888poker:" hideIcon={true}/>
-                                    <ResultItem content={item.nickWPNpoker} label="WPNpoker:" hideIcon={true}/>
-                                    <ResultItem content={item.nickStretchpoker} label="StretchPoker:" hideIcon={true}/>
-                                    <ResultItem content={item.nickCoinpoker} label="Coinpoker:" hideIcon={true}/>
-                                    <ResultItem content={item.nickiPoker} label="iPoker:" hideIcon={true}/>
+                                    <ResultItem content={item.Pokerstars_com} label="PokerStars.com:"/>
+                                    <ResultItem content={item.Pokersters_es} label="PokerSters.es:"/>
+                                    <ResultItem content={item.Winamax_fr} label="Winamax:"/>
+                                    <ResultItem content={item.nickPS} label="PS:"/>
+                                    <ResultItem content={item.nickGG} label="GG:"/>
+                                    <ResultItem content={item.nickRedStar} label="RedStar:"/>
+                                    <ResultItem content={item.nickRedStar} label="RedStar:"/>
+                                    <ResultItem content={item.nickTigerGaming} label="TigerGaming:"/>
+                                    <ResultItem content={item.nickPartyPoker} label="PartyPoker:"/>
+                                    <ResultItem content={item.nickPokerstars} label="Pokerstars:"/>
+                                    <ResultItem content={item.nick888poker} label="888poker:"/>
+                                    <ResultItem content={item.nickWPNpoker} label="WPNpoker:"/>
+                                    <ResultItem content={item.nickStretchpoker} label="StretchPoker:"/>
+                                    <ResultItem content={item.nickCoinpoker} label="Coinpoker:"/>
+                                    <ResultItem content={item.nickiPoker} label="iPoker:"/>
                                 </div>
                                 <button className={`result__btn ${resultInfo ? "result__btn-active" : ""}`}
                                         type="button" onClick={toggleClass}>
@@ -77,8 +77,8 @@ const ResultItemList = ({results}) => {
                                     </div>
                                 </div>
                                 <div className="result__info">
-                                    <ResultItem content={item.comment} label="Комментарий от фонда:"/>
-                                    <ResultItem content={item.amount} label="Сумма ущерба:"/>
+                                    <ResultItem content={item.comment} label="Комментарий от фонда:" hideIcon={true}/>
+                                    <ResultItem content={item.amount} label="Сумма ущерба:" hideIcon={true}/>
                                 </div>
                             </div>
                         </div>
