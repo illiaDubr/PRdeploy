@@ -13,6 +13,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id(); // primary key (AUTO_INCREMENT)
+            $table->string('username')->nullable();
             $table->string('name')->nullable(); // Можно хранить общее имя или пустым и использовать при входе
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

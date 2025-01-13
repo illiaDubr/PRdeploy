@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('reputation_records', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('player_id')->nullable(); // Связь с игроком
+            $table->string('player_id')->nullable(); // Связь с игроком
             $table->unsignedBigInteger('backer_id')->nullable(); // Связь с фондом
             $table->string('old_player_id')->nullable();
             $table->string('old_backer_id')->nullable();
-
+            $table->string('fund_name')->nullable();
             $table->text('comment')->nullable(); // Текст комментария
             $table->text('arbitrage_descr')->nullable(); // Описание арбитража
             $table->string('amount')->nullable(); // Сумма в арбитраже

@@ -9,15 +9,16 @@ class Backer extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'backer_id'; // Указываем нестандартный ключ
+    protected $primaryKey = 'backer_id';
+
     protected $fillable = [
         'user_id',
+        'old_backer',
         'name',
         'managers',
         'users',
         'readonlys',
         'email',
-        'old_backer',
     ];
 
     protected $casts = [
@@ -25,4 +26,14 @@ class Backer extends Model
         'users' => 'array',
         'readonlys' => 'array',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function reputationRecords()
+    {
+        return $this->hasMany(ReputationRecord::class, 'backer_id');
+    }
 }

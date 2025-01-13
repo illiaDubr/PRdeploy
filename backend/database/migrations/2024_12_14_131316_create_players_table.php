@@ -12,8 +12,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('players', function (Blueprint $table) {
-            $table->id('player_id');
+            $table->string('player_id')->primary();
             $table->unsignedBigInteger('user_id')->nullable();
+            // Внешние ключи
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('set null');
+
+
 
             $table->string('old_id')->nullable()->unique();
 
@@ -22,6 +27,15 @@ return new class extends Migration
             $table->string('middle_name')->nullable();
             $table->string('email')->nullable();
             $table->string('phonenumber')->nullable();
+            //Мейн румы
+            $table->string(column: 'Ggpokerok')->nullable();
+            $table->string(column: 'Ggnetwork')->nullable();
+            $table->string(column: 'Pokerstars_com')->nullable();
+            $table->string(column: 'Pokersters_es')->nullable();
+            $table->string(column: 'Winamax_fr')->nullable();
+            $table->string(column: 'Winamax_es')->nullable();
+            //тоже важные румы но не основные
+
             $table->string(column: 'nickPS')->nullable();
             $table->string(column: 'nickGG')->nullable();
             $table->string(column: 'nickRedStar')->nullable();
@@ -40,20 +54,15 @@ return new class extends Migration
             $table->string(column: 'Luxon')->nullable();
             $table->string('telegram')->nullable();
             $table->string('discord')->nullable();
-
-            $table->text('descr')->nullable(); // Описание из case
-            $table->string('amount')->nullable(); // Сумма из case
-            $table->string('fund_name')->nullable(); // Имя фонда
+            $table->string('skype')->nullable();
 
             $table->boolean('kyc_status')->default(false);
             $table->timestamp('kyc_verified_at')->nullable();
-
+            $table->string('backer_tag')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->timestamps(); // created_at, updated_at
 
-            // Внешние ключи
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('created_by')->references('id')->on('users')->onDelete('set null');
+
         });
     }
 

@@ -9,13 +9,16 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\JsonProcessingController;
+
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
 
 
-//Route::post('/search-players', [\App\Http\Controllers\PlayerController::class, 'search']);
+Route::post('/process-json', [JsonProcessingController::class, 'processJson']);
+
 
 Route::controller(\App\Http\Controllers\PlayerController::class)
     ->prefix('search-players')
