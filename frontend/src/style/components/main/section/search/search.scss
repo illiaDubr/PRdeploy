@@ -382,6 +382,7 @@
         .result-right {
           flex: 1 1 440px;
           flex-direction: row;
+          position: relative;
 
           .result__title {
             max-width: 130px;
@@ -396,6 +397,7 @@
           }
 
           .result__user-status {
+            position: absolute;
             border-radius: 100px;
             padding: 4px 16px;
             @include mixin.font-style(500, 14, 143, #121317);
@@ -433,6 +435,10 @@
               @include mixin.font-style(400, 16, 130, #FFFFFF);
               border-bottom: 1px solid #121317;
               padding-bottom: 10px;
+
+              &:first-child {
+                padding-right: 165px;
+              }
 
               span {
                 @include mixin.font-style(600, 18, 130, #FFFFFF);
@@ -515,20 +521,22 @@
 @media (width < 968px) {
   .search__wrap {
     .result__container {
-      .result__box {
-        .result-left {
-          max-width: 100%;
-        }
-        .result-right {
-          align-items: flex-start;
-          flex-direction: column;
-
-          .result__title {
+      .result__wrapper {
+        .result__box {
+          .result-left {
             max-width: 100%;
           }
+          .result-right {
+            align-items: flex-start;
+            flex-direction: column;
 
-          .result__info {
-            width: 100%;
+            .result__title {
+              max-width: 100%;
+            }
+
+            .result__info {
+              width: 100%;
+            }
           }
         }
       }

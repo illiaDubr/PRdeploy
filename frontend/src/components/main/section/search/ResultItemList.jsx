@@ -4,9 +4,9 @@ import ResultItem from "./ResultItem.jsx";
 
 const backerTagConfig = {
     arbitration: { text: "Спорный случай", color: "red" },
-    "left poker": { text: "Покинул покер", color: "orange" },
+    "left poker": { text: "Ушел из покера", color: "orange" },
     "pays off debt": { text: "Погашает долг", color: "yellow" },
-    "closed issue": { text: "Вопрос закрыт", color: "green" },
+    "closed issue": { text: "Рассчитался", color: "green" },
     default: { text: "Нет метки", color: "gray" },
 };
 
