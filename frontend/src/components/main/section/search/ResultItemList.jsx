@@ -7,7 +7,7 @@ const backerTagConfig = {
     "left poker": { text: "Покинул покер", color: "orange" },
     "pays off debt": { text: "Погашает долг", color: "yellow" },
     "closed issue": { text: "Вопрос закрыт", color: "green" },
-    default: { text: "Нет данных", color: "gray" },
+    default: { text: "Нет метки", color: "gray" },
 };
 
 const getBackerTagConfig = (tag) => backerTagConfig[tag] || backerTagConfig.default;
@@ -21,7 +21,7 @@ const ResultItemList = ({results}) => {
     };
 
     return (
-        <div className="box">
+        <div className="result__wrapper">
             {
                 results.map((item) => {
                     const {text, color} = getBackerTagConfig(item.backer_tag);
@@ -29,7 +29,9 @@ const ResultItemList = ({results}) => {
                         <div className="result__box" key={item.id}>
                             <div className="result result-left">
                                 <div className="result__title">
-                                    {item.first_name || "—"}
+                                    {item.first_name || ""}
+                                    {item.last_name || ""}
+                                    {item.middle_name || ""}
                                 </div>
                                 <div className="result__info">
                                     <ResultItem content={item.phonenumber} iconId="search__phone"/>
@@ -77,8 +79,8 @@ const ResultItemList = ({results}) => {
                                     </div>
                                 </div>
                                 <div className="result__info">
-                                    <ResultItem content={item.comment} label="Комментарий от фонда:" hideIcon={true}/>
                                     <ResultItem content={item.amount} label="Сумма ущерба:" hideIcon={true}/>
+                                    <ResultItem content={item.comment} label="Комментарий от фонда:" hideIcon={true}/>
                                 </div>
                             </div>
                         </div>

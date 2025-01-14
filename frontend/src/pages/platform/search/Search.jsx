@@ -18,7 +18,7 @@ function Search() {
                 <search role="search" className="search__container">
                     <SearchForm/>
                 </search>
-                <SearchResult />
+                <SearchResult/>
             </Main>
         </>
     );
