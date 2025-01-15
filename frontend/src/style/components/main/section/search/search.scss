@@ -333,6 +333,7 @@
 
                 .result__label {
                   text-align: center;
+                  @include mixin.font-style(600, null, null, null);
                   display: flex;
                   align-items: center;
                   height: 100%;
