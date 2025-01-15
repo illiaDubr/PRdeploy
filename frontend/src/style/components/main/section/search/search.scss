@@ -333,7 +333,6 @@
 
                 .result__label {
                   text-align: center;
-                  @include mixin.font-style(600, null, null, null);
                   display: flex;
                   align-items: center;
                   height: 100%;
@@ -444,6 +443,12 @@
 
               span {
                 @include mixin.font-style(600, 18, 130, #FFFFFF);
+              }
+
+              .result__head {
+                .result__label {
+                  @include mixin.font-style(600, 18, 130, #FFFFFF);
+                }
               }
 
               .react-tooltip {
