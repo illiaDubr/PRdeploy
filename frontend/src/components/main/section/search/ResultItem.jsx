@@ -28,6 +28,11 @@ const ResultItem = ({content, iconId, label, hideIcon}) => {
         setRandomBorderColor(getRandomColor());
     }, []);
 
+    const copyToClipboard = (text) => {
+        navigator.clipboard.writeText(text).then(() => {
+        });
+    };
+
     return (
         <div className="result__text">
             <div className="result__head">
@@ -40,7 +45,8 @@ const ResultItem = ({content, iconId, label, hideIcon}) => {
                 ) : null}
                 {label && <div className={"result__label"}>{label}</div>}
             </div>
-            <div className="result__content" ref={contentRef} data-tooltip-id={isOverflowing ? "tooltip" : undefined} data-tooltip-content={isOverflowing ? content : undefined}>
+            <div className="result__content" ref={contentRef} data-tooltip-id={isOverflowing ? "tooltip" : undefined}
+                 data-tooltip-content={isOverflowing ? content : undefined}>
                 {content || "—"}
             </div>
             <Tooltip id="tooltip" place="top" clickable={true}/>

@@ -385,7 +385,7 @@
           position: relative;
 
           .result__title {
-            max-width: 130px;
+            min-width: 100px;
             height: fit-content;
             display: flex;
             align-items: center;
@@ -398,6 +398,7 @@
 
           .result__user-status {
             position: absolute;
+            right: 24px;
             border-radius: 100px;
             padding: 4px 16px;
             @include mixin.font-style(500, 14, 143, #121317);
