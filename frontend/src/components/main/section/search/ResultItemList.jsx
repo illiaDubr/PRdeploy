@@ -29,8 +29,8 @@ const ResultItemList = ({results}) => {
                         <div className="result__box" key={item.id}>
                             <div className="result result-left">
                                 <div className="result__title">
-                                    {item.first_name || ""}
-                                    {item.last_name || ""}
+                                    {item.first_name || ""}&nbsp;
+                                    {item.last_name || ""}&nbsp;
                                     {item.middle_name || ""}
                                 </div>
                                 <div className="result__info">
