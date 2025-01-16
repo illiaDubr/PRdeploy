@@ -46,7 +46,7 @@ const ResultItem = ({content, iconId, label, hideIcon}) => {
             >
                 {content || "—"}
             </div>
-            <Tooltip anchorSelect={tooltipId} place="top" clickable>
+            <Tooltip id={tooltipId} place="top" clickable>
                 <button onClick={copyToClipboard}>Скопировать</button>
             </Tooltip>
         </div>
