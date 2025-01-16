@@ -1,57 +1,55 @@
-import React from "react";
+import { useEffect, useRef, useState } from "react";
 import IconSvg from "../../components/IconSvg.jsx";
-import { Tooltip } from 'react-tooltip'
-import 'react-tooltip/dist/react-tooltip.css'
+import { Tooltip } from 'react-tooltip';
+import 'react-tooltip/dist/react-tooltip.css';
 
-const getRandomColor = () => {
+function getRandomColor() {
     const letters = "0123456789ABCDEF";
     let color = "#";
     for (let i = 0; i < 6; i++) {
         color += letters[Math.floor(Math.random() * 16)];
     }
     return color;
-};
+}
 
-const ResultItem = ({content, iconId, label, hideIcon}) => {
-    const contentRef = React.useRef(null);
-    const [isOverflowing, setIsOverflowing] = React.useState(false);
-    const [randomBorderColor, setRandomBorderColor] = React.useState(getRandomColor());
+const ResultItem = ({ content, iconId, label, hideIcon }) => {
+    const contentRef = useRef(null);
+    const [isOverflowing, setIsOverflowing] = useState(false);
+    const [randomBorderColor] = useState(getRandomColor());
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (contentRef.current) {
-            const isTextOverflowing = contentRef.current.scrollWidth > contentRef.current.offsetWidth;
+            const isTextOverflowing =
+                contentRef.current.scrollWidth > contentRef.current.offsetWidth;
             setIsOverflowing(isTextOverflowing);
         }
     }, [content]);
 
-    React.useEffect(() => {
-        setRandomBorderColor(getRandomColor());
-    }, []);
-
-    const copyToClipboard = (text) => {
-        navigator.clipboard.writeText(text).then(() => {
-        });
-    };
-
     return (
         <div className="result__text">
             <div className="result__head">
-                {!hideIcon ? (
+                {!hideIcon && (
                     iconId ? (
                         <IconSvg width={20} height={20} id={iconId} />
                     ) : (
-                        <span style={{borderColor: `${randomBorderColor}`}}></span>
+                        <span style={{ borderColor: randomBorderColor }} />
                     )
-                ) : null}
-                {label && <div className={"result__label"}>{label}</div>}
+                )}
+                {label && <div className="result__label">{label}</div>}
             </div>
-            <div className="result__content" ref={contentRef} data-tooltip-id={isOverflowing ? "tooltip" : undefined}
-                 data-tooltip-content={isOverflowing ? content : undefined}>
+
+            <div
+                className="result__content"
+                ref={contentRef}
+                data-tooltip-id={isOverflowing ? "tooltip" : undefined}
+                data-tooltip-content={isOverflowing ? content : undefined}
+            >
                 {content || "—"}
             </div>
-            <Tooltip id="tooltip" place="top" clickable={true}/>
+
+            <Tooltip id="tooltip" place="top" clickable />
         </div>
-    )
-}
+    );
+};
 
 export default ResultItem;

@@ -1,8 +1,7 @@
-import React from "react";
 import IconSvg from "../../components/IconSvg.jsx";
 import ResultItem from "./ResultItem.jsx";
 
-const backerTagConfig = {
+const BACKER_TAG_CONFIG = {
     arbitration: { text: "Спорный случай", color: "red" },
     "left poker": { text: "Ушел из покера", color: "orange" },
     "pays off debt": { text: "Погашает долг", color: "yellow" },
@@ -10,85 +9,81 @@ const backerTagConfig = {
     default: { text: "Нет метки", color: "gray" },
 };
 
-const getBackerTagConfig = (tag) => backerTagConfig[tag] || backerTagConfig.default;
+function getBackerTagConfig(tag) {
+    return BACKER_TAG_CONFIG[tag] || BACKER_TAG_CONFIG.default;
+}
 
+function formatFullName(firstName, lastName, middleName) {
+    return `${firstName || ""} ${lastName || ""} ${middleName || ""}`.trim();
+}
 
-const ResultItemList = ({results}) => {
-    const [resultInfo, setResultInfo] = React.useState(false);
+function formatDate(dateString) {
+    if (!dateString) return "-";
+    return dateString.slice(0, 10);
+}
 
-    const toggleClass = () => {
-        setResultInfo((prevState) => !prevState);
-    };
+const ResultItemList = ({ results = [] }) => {
+    if (!results.length) {
+        return <p>Нет данных</p>;
+    }
 
     return (
         <div className="result__wrapper">
-            {
-                results.map((item) => {
-                    const {text, color} = getBackerTagConfig(item.backer_tag);
-                   return (
-                        <div className="result__box" key={item.id}>
-                            <div className="result result-left">
-                                <div className="result__title">
-                                    {item.first_name || ""}&nbsp;
-                                    {item.last_name || ""}&nbsp;
-                                    {item.middle_name || ""}
-                                </div>
-                                <div className="result__info">
-                                    <ResultItem content={item.phonenumber} iconId="search__phone"/>
-                                    <ResultItem content={item.email} iconId="search__mail"/>
-                                    <ResultItem content={item.discord} iconId="search__mail" label="Discord:"/>
-                                    <ResultItem content={item.nickchikoPoker} label="СhikoPoker:"/>
-                                    <ResultItem content={item.Ggpokerok} label="GgPokerok:"/>
-                                    <ResultItem content={item.Ggnetwork} label="GgNetwork:"/>
-                                </div>
-                                <div className={`result__info ${resultInfo ? "result__info-active" : "result__info-close"}`}>
-                                    <ResultItem content={item.Pokerstars_com} label="PokerStars.com:"/>
-                                    <ResultItem content={item.Pokersters_es} label="PokerSters.es:"/>
-                                    <ResultItem content={item.Winamax_fr} label="Winamax:"/>
-                                    <ResultItem content={item.nickPS} label="PS:"/>
-                                    <ResultItem content={item.nickGG} label="GG:"/>
-                                    <ResultItem content={item.nickRedStar} label="RedStar:"/>
-                                    <ResultItem content={item.nickRedStar} label="RedStar:"/>
-                                    <ResultItem content={item.nickTigerGaming} label="TigerGaming:"/>
-                                    <ResultItem content={item.nickPartyPoker} label="PartyPoker:"/>
-                                    <ResultItem content={item.nickPokerstars} label="Pokerstars:"/>
-                                    <ResultItem content={item.nick888poker} label="888poker:"/>
-                                    <ResultItem content={item.nickWPNpoker} label="WPNpoker:"/>
-                                    <ResultItem content={item.nickStretchpoker} label="StretchPoker:"/>
-                                    <ResultItem content={item.nickCoinpoker} label="Coinpoker:"/>
-                                    <ResultItem content={item.nickiPoker} label="iPoker:"/>
-                                </div>
-                                <button className={`result__btn ${resultInfo ? "result__btn-active" : ""}`}
-                                        type="button" onClick={toggleClass}>
-                                    {`${resultInfo ? "Свернуть" : "Показать еще"}`}
-                                    <IconSvg width={20} height={20} id="arrow"/>
-                                </button>
-                            </div>
-                            <div className="result result-right">
-                                <div className="result__title">
-                                    <div className="result__author">
-                                        {item.fund_name || "—"}
-                                        <IconSvg width={20} height={20} id={item.fund_name}/>
-                                    </div>
-                                    <div className="">
-                                        Запись от
-                                        <br/>
-                                        {item.created_at ? item.created_at.slice(0, 10) : "-"}
-                                    </div>
-                                </div>
-                                <div className={`result__user-status result__user-status--${color}`}>
-                                    {text}
-                                </div>
-                                <div className="result__info">
-                                    <ResultItem content={item.amount} label="Сумма ущерба:" hideIcon={true}/>
-                                    <ResultItem content={item.comment} label="Комментарий от фонда:" hideIcon={true}/>
-                                </div>
+            {results.map((item) => {
+                const {
+                    id,
+                    backer_tag,
+                    first_name,
+                    last_name,
+                    middle_name,
+                    phonenumber,
+                    email,
+                    discord,
+                    fund_name,
+                    created_at,
+                    amount,
+                    comment,
+                } = item;
+
+                const { text, color } = getBackerTagConfig(backer_tag);
+                const fullName = formatFullName(first_name, last_name, middle_name);
+                const date = formatDate(created_at);
+
+                return (
+                    <div className="result__box" key={id}>
+                        <div className="result result-left">
+                            <div className="result__title">{fullName}</div>
+                            <div className="result__info">
+                                <ResultItem content={phonenumber} iconId="search__phone" />
+                                <ResultItem content={email} iconId="search__mail" />
+                                <ResultItem content={discord} iconId="search__mail" label="Discord:" />
                             </div>
                         </div>
-                   )
-                })}
+
+                        <div className="result result-right">
+                            <div className="result__title">
+                                <div className="result__author">
+                                    <IconSvg width={48} height={48} id={fund_name} />
+                                </div>
+                                <div>
+                                    Запись от
+                                    <br />
+                                    {date}
+                                </div>
+                            </div>
+                            <div className={`result__user-status result__user-status--${color}`}>
+                                {text}
+                            </div>
+                            <div className="result__info">
+                                <ResultItem content={amount} label="Сумма ущерба:" hideIcon />
+                                <ResultItem content={comment} label="Комментарий от фонда:" hideIcon />
+                            </div>
+                        </div>
+                    </div>
+                );
+            })}
         </div>
-    )
-}
+    );
+};
 
 export default ResultItemList;

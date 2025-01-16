@@ -345,38 +345,6 @@
               }
             }
           }
-
-          .result__info-close {
-            visibility: hidden;
-
-            .result__text {
-              display: none;
-            }
-          }
-
-          .result__info-active {
-            visibility: visible;
-            padding-bottom: 15px;
-          }
-
-          .result__btn {
-            display: flex;
-            align-items: center;
-            @include mixin.font-style(400, 14, 143, #cfd7ff);
-            position: absolute;
-            bottom: 12px;
-
-            .svg {
-              transition: all .4s ease;
-              rotate: 90deg;
-            }
-          }
-
-          .result__btn-active {
-            .svg {
-              rotate: 270deg;
-            }
-          }
         }
 
         .result-right {
@@ -436,6 +404,11 @@
               @include mixin.font-style(400, 16, 130, #FFFFFF);
               border-bottom: 1px solid #121317;
               padding-bottom: 10px;
+
+              .result__content {
+                display: flex;
+                align-items: center;
+              }
 
               &:first-child {
                 padding-right: 165px;
