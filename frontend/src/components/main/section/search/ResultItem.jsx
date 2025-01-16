@@ -18,6 +18,7 @@ const ResultItem = ({content, iconId, label, hideIcon}) => {
     const tooltipId = `resultItem-${Math.random().toString(36).slice(2, 9)}`;
 
     const copyToClipboard = (text) => {
+        if (!text) return;
         navigator.clipboard.writeText(text)
             .then(() => {
                 console.log("Скопировано!");
@@ -39,15 +40,12 @@ const ResultItem = ({content, iconId, label, hideIcon}) => {
                 )}
                 {label && <div className="result__label">{label}</div>}
             </div>
-            <div
-                className="result__content"
-                data-tooltip-id={tooltipId}
-                data-tooltip-content={content}
-            >
+            <div className="result__content" data-tooltip-id={tooltipId}>
                 {content || "—"}
             </div>
             <Tooltip id={tooltipId} place="top" clickable>
-                <button onClick={copyToClipboard}>Скопировать</button>
+                {content}
+                <button onClick={() => copyToClipboard(content)}>Скопировать</button>
             </Tooltip>
         </div>
     );
