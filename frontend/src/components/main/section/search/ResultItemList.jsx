@@ -68,6 +68,7 @@ const ResultItemList = ({results}) => {
                                 <div className="result__title">
                                     <div className="result__author">
                                         {item.fund_name || "—"}
+                                        <IconSvg width={20} height={20} id={item.fund_name}/>
                                     </div>
                                     <div className="">
                                         Запись от
