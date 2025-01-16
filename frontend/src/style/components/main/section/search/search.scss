@@ -346,6 +346,20 @@
                 overflow: hidden;
                 text-overflow: ellipsis;
               }
+
+              .result__tooltip {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                gap: 4px;
+
+                .result__tooltip-btn {
+                  padding: 4px 8px;
+                  background: #efefef;
+                  border: 1px solid #ccc;
+                  border-radius: 4px;
+                }
+              }
             }
           }
         }

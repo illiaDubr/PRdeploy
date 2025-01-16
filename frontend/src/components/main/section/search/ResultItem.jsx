@@ -18,13 +18,19 @@ const ResultItem = ({content, iconId, label, hideIcon}) => {
     const tooltipId = `resultItem-${Math.random().toString(36).slice(2, 9)}`;
 
     const copyToClipboard = (text) => {
-        if (!text) return;
+        if (!text) {
+            console.error("Нечего копировать: текст пустой!");
+            return;
+        }
+
         navigator.clipboard.writeText(text)
             .then(() => {
-                console.log("Скопировано!");
+                console.log("Текст успешно скопирован:", text);
+                alert("Текст скопирован в буфер обмена!");
             })
-            .catch(() => {
-                console.error("Ошибка копирования");
+            .catch((err) => {
+                console.error("Ошибка при копировании текста:", err);
+                alert("Не удалось скопировать текст.");
             });
     };
 
@@ -44,8 +50,10 @@ const ResultItem = ({content, iconId, label, hideIcon}) => {
                 {content || "—"}
             </div>
             <Tooltip id={tooltipId} place="top" clickable>
-                {content}
-                <button onClick={() => copyToClipboard(content)}>Скопировать</button>
+                <div className="result__tooltip">
+                    {content}
+                    <button className="result__tooltip-btn" onClick={() => copyToClipboard(content)}>Скопировать</button>
+                </div>
             </Tooltip>
         </div>
     );
