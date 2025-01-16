@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import IconSvg from "../../components/IconSvg.jsx";
-import { Tooltip } from 'react-tooltip';
-import 'react-tooltip/dist/react-tooltip.css';
+import { Tooltip } from "react-tooltip";
+import "react-tooltip/dist/react-tooltip.css";
 
 function getRandomColor() {
     const letters = "0123456789ABCDEF";
@@ -13,17 +13,19 @@ function getRandomColor() {
 }
 
 const ResultItem = ({ content, iconId, label, hideIcon }) => {
-    const contentRef = useRef(null);
-    const [isOverflowing, setIsOverflowing] = useState(false);
     const [randomBorderColor] = useState(getRandomColor());
 
-    useEffect(() => {
-        if (contentRef.current) {
-            const isTextOverflowing =
-                contentRef.current.scrollWidth > contentRef.current.offsetWidth;
-            setIsOverflowing(isTextOverflowing);
-        }
-    }, [content]);
+    const tooltipId = `resultitem-${Math.random().toString(36).slice(2, 9)}`;
+
+    const copyToClipboard = (text) => {
+        navigator.clipboard.writeText(text)
+            .then(() => {
+                console.log("Скопировано!");
+            })
+            .catch(() => {
+                console.error("Ошибка копирования");
+            });
+    };
 
     return (
         <div className="result__text">
@@ -37,17 +39,39 @@ const ResultItem = ({ content, iconId, label, hideIcon }) => {
                 )}
                 {label && <div className="result__label">{label}</div>}
             </div>
-
             <div
                 className="result__content"
-                ref={contentRef}
-                data-tooltip-id={isOverflowing ? "tooltip" : undefined}
-                data-tooltip-content={isOverflowing ? content : undefined}
+                data-tooltip-id={tooltipId}      // «Якорь» тултипа
+                data-tooltip-content={content}   // Текст для тултипа
             >
                 {content || "—"}
             </div>
+            <Tooltip
+                id={tooltipId}
+                place="top"
+                clickable
+                getContent={(dataTip) => {
+                    if (!dataTip) return null;
 
-            <Tooltip id="tooltip" place="top" clickable />
+                    return (
+                        <div style={{ maxWidth: 220 }}>
+                            <div style={{ marginBottom: "8px" }}>{dataTip}</div>
+                            <button
+                                onClick={() => copyToClipboard(dataTip)}
+                                style={{
+                                    cursor: "pointer",
+                                    padding: "4px 8px",
+                                    backgroundColor: "#efefef",
+                                    border: "1px solid #ccc",
+                                    borderRadius: "4px"
+                                }}
+                            >
+                                Скопировать
+                            </button>
+                        </div>
+                    );
+                }}
+            />
         </div>
     );
 };

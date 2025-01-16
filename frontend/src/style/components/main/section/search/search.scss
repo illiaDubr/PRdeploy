@@ -303,6 +303,7 @@
           .result__title {
             @include mixin.font-style(600, 20, 130, #FFFFFF);
             letter-spacing: -0.01em;
+            z-index: 2;
           }
 
           .result__info {
@@ -310,6 +311,7 @@
             grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
             grid-gap: 8px;
             position: relative;
+            z-index: 2;
 
             .result__text {
               display: flex;
