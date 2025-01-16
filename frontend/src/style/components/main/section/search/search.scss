@@ -321,6 +321,7 @@
 
               .result__head {
                 display: flex;
+                align-items: center;
                 gap: 4px;
                 @include mixin.font-style(500, 18, 130, #FFFFFF);
 
