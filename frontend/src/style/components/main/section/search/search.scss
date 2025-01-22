@@ -350,10 +350,11 @@
               .result__tooltip {
                 display: flex;
                 flex-direction: column;
-                justify-content: center;
+                align-items: center;
                 gap: 4px;
 
                 .result__tooltip-btn {
+                  width: fit-content;
                   padding: 4px 8px;
                   background: #efefef;
                   border: 1px solid #ccc;
