@@ -68,11 +68,13 @@ export default class Store {
     async logout() {
         try {
             await AuthService.logout();
+        } catch (e) {
+            console.log(e.response?.data?.message || 'Ошибка логаута');
+        } finally {
             localStorage.removeItem('token');
             this.setAuth(false);
             this.setUser({});
-        } catch (e) {
-            console.log(e.response?.data?.message);
+            this.setResults([]);
         }
     }
 

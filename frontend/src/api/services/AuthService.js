@@ -24,7 +24,13 @@ export default class AuthService {
 
     static async logout() {
         await this.getCsrfToken();
-        return $api.post('/api/logout');
+        console.log('Токен перед отправкой:', localStorage.getItem('token'));
+        try {
+            return $api.post('/api/logout');
+        } catch (error) {
+            console.error('Ошибка логаута:', error.response?.data || error.message);
+            throw error;
+        }
     }
 
     static async verification(email) {
