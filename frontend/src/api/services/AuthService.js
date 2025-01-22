@@ -23,14 +23,13 @@ export default class AuthService {
     }
 
     static async logout() {
-        await this.getCsrfToken();
-        console.log('Токен перед отправкой:', localStorage.getItem('token'));
-        try {
-            return $api.post('/api/logout');
-        } catch (error) {
-            console.error('Ошибка логаута:', error.response?.data || error.message);
-            throw error;
+        const token = localStorage.getItem('token');
+        if (!token) {
+            console.error('Токен отсутствует, логаут невозможен!');
+            return;
         }
+        await this.getCsrfToken();
+        return $api.post('/api/logout');
     }
 
     static async verification(email) {

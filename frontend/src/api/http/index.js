@@ -8,9 +8,14 @@ const $api = axios.create({
 })
 
 $api.interceptors.request.use((config) => {
-    config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
+    const token = localStorage.getItem('token');
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+    } else {
+        console.warn('Токен отсутствует!');
+    }
     return config;
-})
+});
 
 $api.interceptors.response.use(config => {
     return config;

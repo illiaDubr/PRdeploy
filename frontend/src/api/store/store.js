@@ -39,15 +39,19 @@ export default class Store {
     }
 
     async login(email, password) {
-        console.log('Отправляемые данные:', { email, password });
         try {
             const response = await AuthService.login(email, password);
-            console.log(response);
-            localStorage.setItem('token', response.data.accessToken);
-            this.setAuth(true);
-            this.setUser(response.data.user);
+            console.log('Ответ сервера:', response.data);
+            const token = response.data.accessToken;
+            if (token) {
+                localStorage.setItem('token', token);
+                this.setAuth(true);
+                this.setUser(response.data.user);
+            } else {
+                console.error('Токен не получен!');
+            }
         } catch (e) {
-            console.log(e.response?.data?.message);
+            console.error(e.response?.data?.message || 'Ошибка логина');
         }
     }
 
