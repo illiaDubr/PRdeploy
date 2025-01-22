@@ -56,16 +56,20 @@ export default class Store {
     }
 
     async registration(email, password, password_confirmation) {
-        event.preventDefault();
-        console.log('Отправляемые данные:', { email, password, password_confirmation });
         try {
             const response = await AuthService.registration(email, password, password_confirmation);
-            console.log(response);
-            localStorage.setItem('token', response.data.accessToken);
-            this.setAuth(true);
-            this.setUser(response.data.user);
+            console.log('Ответ сервера:', response.data);
+
+            const token = response.data.accessToken; // Убедись, что токен есть в ответе
+            if (token) {
+                localStorage.setItem('token', token); // Сохраняем токен
+                this.setAuth(true); // Обновляем состояние
+                this.setUser(response.data.user);
+            } else {
+                console.error('Токен отсутствует в ответе!');
+            }
         } catch (e) {
-            console.log(e.response?.data?.message);
+            console.error('Ошибка регистрации:', e.response?.data?.message || e.message);
         }
     }
 
