@@ -154,7 +154,7 @@ const ResultItemList = ({results = []}) => {
 
                             <div className="result__info">
                                 <ResultItem
-                                    content={amount.replace(/^(\d)/, '$1 ')}
+                                    content={amount}
                                     label="Сумма ущерба:"
                                     hideIcon
                                     placeholder="Нет данных"
