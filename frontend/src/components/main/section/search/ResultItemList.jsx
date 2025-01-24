@@ -43,7 +43,7 @@ const dynamicFields = [
     {key: "nickiPoker", label: "iPoker:"},
 ];
 
-const ResultItemList = ({ results = [] }) => {
+const ResultItemList = ({results = []}) => {
     const [resultInfo, setResultInfo] = React.useState(false);
 
     const toggleClass = () => {
@@ -68,16 +68,16 @@ const ResultItemList = ({ results = [] }) => {
                     comment,
                 } = item;
 
-                const { text, color } = getBackerTagConfig(backer_tag);
+                const {text, color} = getBackerTagConfig(backer_tag);
                 const fullName = formatFullName(first_name, last_name, middle_name);
                 const date = formatDate(created_at);
 
                 const dynamicFieldItems = dynamicFields
-                    .map(({ key, label }) => {
+                    .map(({key, label}) => {
                         const fieldValue = item[key];
-                        return fieldValue ? { key, content: fieldValue, label } : null;
+                        return fieldValue ? {key, content: fieldValue, label} : null;
                     })
-                    .filter(Boolean); // Убираем пустые значения
+                    .filter(Boolean);
 
                 const firstThreeFields = dynamicFieldItems.slice(0, 3);
                 const remainingFields = dynamicFieldItems.slice(3);
@@ -88,11 +88,27 @@ const ResultItemList = ({ results = [] }) => {
                             <div className="result__title">{fullName}</div>
 
                             <div className="result__info">
-                                <ResultItem content={phonenumber} iconId="search__phone" />
-                                <ResultItem content={email} iconId="search__mail" />
-                                <ResultItem content={discord} iconId="search__discord" label="Discord:" />
+                                {phonenumber && (
+                                    <ResultItem
+                                        content={phonenumber}
+                                        iconId="search__phone"
+                                    />
+                                )}
+                                {email && (
+                                    <ResultItem
+                                        content={email}
+                                        iconId="search__mail"
+                                    />
+                                )}
+                                {discord && (
+                                    <ResultItem
+                                        content={discord}
+                                        iconId="search__discord"
+                                        label="Discord:"
+                                    />
+                                )}
 
-                                {firstThreeFields.map(({ key, content, label }) => (
+                                {firstThreeFields.map(({key, content, label}) => (
                                     <ResultItem
                                         key={key}
                                         content={content}
@@ -138,7 +154,7 @@ const ResultItemList = ({ results = [] }) => {
 
                             <div className="result__info">
                                 <ResultItem
-                                    content={amount}
+                                    content={amount.replace(/^(\d)/, '$1 ')}
                                     label="Сумма ущерба:"
                                     hideIcon
                                     placeholder="Нет данных"

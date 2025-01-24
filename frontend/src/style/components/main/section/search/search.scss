@@ -325,7 +325,7 @@
                 display: flex;
                 align-items: center;
                 gap: 4px;
-                @include mixin.font-style(500, 18, 130, #FFFFFF);
+                @include mixin.font-style(500, 16, 130, #FFFFFF);
 
                 span {
                   width: 20px;
