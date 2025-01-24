@@ -363,6 +363,38 @@
               }
             }
           }
+
+          .result__info-close {
+            visibility: hidden;
+
+            .result__text {
+              display: none;
+            }
+          }
+
+          .result__info-active {
+            visibility: visible;
+            padding-bottom: 15px;
+          }
+
+          .result__btn {
+            display: flex;
+            align-items: center;
+            @include mixin.font-style(400, 14, 143, #cfd7ff);
+            position: absolute;
+            bottom: 12px;
+
+            .svg {
+              transition: all .4s ease;
+              rotate: 90deg;
+            }
+          }
+
+          .result__btn-active {
+            .svg {
+              rotate: 270deg;
+            }
+          }
         }
 
         .result-right {

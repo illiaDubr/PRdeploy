@@ -12,7 +12,7 @@ function getRandomColor() {
     return color;
 }
 
-const ResultItem = ({content, iconId, label, hideIcon}) => {
+const ResultItem = ({content, iconId, label, hideIcon, placeholder}) => {
     const [randomBorderColor] = useState(getRandomColor());
 
     const tooltipId = `resultItem-${Math.random().toString(36).slice(2, 9)}`;
@@ -47,12 +47,17 @@ const ResultItem = ({content, iconId, label, hideIcon}) => {
                 {label && <div className="result__label">{label}</div>}
             </div>
             <div className="result__content" data-tooltip-id={tooltipId}>
-                {content || "—"}
+                {content
+                    ? content
+                    : hideIcon
+                        ? placeholder || "—"
+                        : null}
             </div>
             <Tooltip id={tooltipId} place="top" clickable>
                 <div className="result__tooltip">
                     {content}
-                    <button className="result__tooltip-btn" onClick={() => copyToClipboard(content)}>Скопировать</button>
+                    <button className="result__tooltip-btn" onClick={() => copyToClipboard(content)}>Скопировать
+                    </button>
                 </div>
             </Tooltip>
         </div>

@@ -1,3 +1,4 @@
+import React from "react";
 import IconSvg from "../../components/IconSvg.jsx";
 import ResultItem from "./ResultItem.jsx";
 
@@ -43,6 +44,11 @@ const dynamicFields = [
 ];
 
 const ResultItemList = ({ results = [] }) => {
+    const [resultInfo, setResultInfo] = React.useState(false);
+
+    const toggleClass = () => {
+        setResultInfo((prevState) => !prevState);
+    };
     if (!results.length) {
         return <p>Нет данных</p>;
     }
@@ -69,7 +75,6 @@ const ResultItemList = ({ results = [] }) => {
                 const fullName = formatFullName(first_name, last_name, middle_name);
                 const date = formatDate(created_at);
 
-                // Фильтруем только заполненные динамические поля
                 const dynamicFieldItems = dynamicFields
                     .map(({ key, label }) => {
                         const fieldValue = item[key];
@@ -77,7 +82,6 @@ const ResultItemList = ({ results = [] }) => {
                     })
                     .filter(Boolean); // Убираем пустые значения
 
-                // Разделяем динамические поля на два блока
                 const firstThreeFields = dynamicFieldItems.slice(0, 3);
                 const remainingFields = dynamicFieldItems.slice(3);
 
@@ -89,7 +93,7 @@ const ResultItemList = ({ results = [] }) => {
                             <div className="result__info">
                                 <ResultItem content={phonenumber} iconId="search__phone" />
                                 <ResultItem content={email} iconId="search__mail" />
-                                <ResultItem content={discord} iconId="search__mail" label="Discord:" />
+                                <ResultItem content={discord} iconId="search__discord" label="Discord:" />
 
                                 {firstThreeFields.map(({ key, content, label }) => (
                                     <ResultItem
@@ -101,24 +105,32 @@ const ResultItemList = ({ results = [] }) => {
                             </div>
 
                             {remainingFields.length > 0 && (
-                                <div className="result__info-2">
-                                    {remainingFields.map(({ key, content, label }) => (
-                                        <ResultItem
-                                            key={key}
-                                            content={content}
-                                            label={label}
-                                        />
-                                    ))}
-                                </div>
+                                <>
+                                    <div
+                                        className={`result__info ${resultInfo ? "result__info-active" : "result__info-close"}`}>
+                                        {remainingFields.map(({key, content, label}) => (
+                                            <ResultItem
+                                                key={key}
+                                                content={content}
+                                                label={label}
+                                            />
+                                        ))}
+                                    </div>
+                                    <button className={`result__btn ${resultInfo ? "result__btn-active" : ""}`}
+                                            type="button" onClick={toggleClass}>
+                                        {`${resultInfo ? "Свернуть" : "Показать еще"}`}
+                                        <IconSvg width={20} height={20} id="arrow"/>
+                                    </button>
+                                </>
                             )}
                         </div>
 
                         <div className="result result-right">
                             <div className="result__title">
-                                <IconSvg width={48} height={48} id={fund_name} />
+                                <IconSvg width={48} height={48} id={fund_name}/>
                                 <div>
                                     запись от
-                                    <br />
+                                    <br/>
                                     {date}
                                 </div>
                             </div>
@@ -132,11 +144,13 @@ const ResultItemList = ({ results = [] }) => {
                                     content={amount}
                                     label="Сумма ущерба:"
                                     hideIcon
+                                    placeholder=""
                                 />
                                 <ResultItem
                                     content={comment}
                                     label="Комментарий от фонда:"
                                     hideIcon
+                                    placeholder="Комментарий отсутствует"
                                 />
                             </div>
                         </div>
