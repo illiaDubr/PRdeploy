@@ -49,9 +49,6 @@ const ResultItemList = ({ results = [] }) => {
     const toggleClass = () => {
         setResultInfo((prevState) => !prevState);
     };
-    if (!results.length) {
-        return <p>Нет данных</p>;
-    }
 
     return (
         <div className="result__wrapper">
@@ -144,7 +141,7 @@ const ResultItemList = ({ results = [] }) => {
                                     content={amount}
                                     label="Сумма ущерба:"
                                     hideIcon
-                                    placeholder=""
+                                    placeholder="Нет данных"
                                 />
                                 <ResultItem
                                     content={comment}
