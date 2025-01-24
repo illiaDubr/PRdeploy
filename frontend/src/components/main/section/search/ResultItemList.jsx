@@ -82,6 +82,11 @@ const ResultItemList = ({results = []}) => {
                 const firstThreeFields = dynamicFieldItems.slice(0, 3);
                 const remainingFields = dynamicFieldItems.slice(3);
 
+                const formatAmount = (amount) => {
+                    if (!amount || amount.length < 2) return amount; // Проверка на пустое значение
+                    return `${amount[0]} ${amount.slice(1)}`;
+                };
+
                 return (
                     <div className="result__box" key={id}>
                         <div className="result result-left">
@@ -154,7 +159,7 @@ const ResultItemList = ({results = []}) => {
 
                             <div className="result__info">
                                 <ResultItem
-                                    content={amount}
+                                    content={formatAmount(amount)}
                                     label="Сумма ущерба:"
                                     hideIcon
                                     placeholder="Нет данных"

@@ -407,7 +407,7 @@
             height: fit-content;
             display: flex;
             align-items: center;
-            flex-wrap: wrap;
+            flex-direction: column;
             justify-content: center;
             gap: 10px;
             @include mixin.font-style(500, 14, 130, #FFFFFF);
@@ -470,7 +470,7 @@
 
               .result__head {
                 .result__label {
-                  @include mixin.font-style(600, 18, 130, #FFFFFF);
+                  @include mixin.font-style(600, 16, 130, #FFFFFF);
                 }
               }
 
@@ -562,6 +562,7 @@
 
             .result__title {
               max-width: 100%;
+              flex-direction: row;
             }
 
             .result__info {
