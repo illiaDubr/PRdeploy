@@ -4,6 +4,13 @@ import PersonalAccount from "./pages/platform/account/PersonalAccount.jsx";
 import Search from "./pages/platform/search/Search.jsx";
 
 export const authRoutes = [
+]
+
+export const publicRoutes = [
+    {
+        path: HOMEPAGE_ROUTE,
+        Component: HomePage
+    },
     {
         path: ACCOUNT_ROUTE,
         Component: PersonalAccount
@@ -11,12 +18,5 @@ export const authRoutes = [
     {
         path: SEARCH_ROUTE,
         Component: Search
-    },
-]
-
-export const publicRoutes = [
-    {
-        path: HOMEPAGE_ROUTE,
-        Component: HomePage
     },
 ]
