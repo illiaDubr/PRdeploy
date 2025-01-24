@@ -42,7 +42,7 @@ const dynamicFields = [
     {key: "nickiPoker", label: "iPoker:"},
 ];
 
-const ResultItemList = ({results = []}) => {
+const ResultItemList = ({ results = [] }) => {
     if (!results.length) {
         return <p>Нет данных</p>;
     }
@@ -65,9 +65,21 @@ const ResultItemList = ({results = []}) => {
                     comment,
                 } = item;
 
-                const {text, color} = getBackerTagConfig(backer_tag);
+                const { text, color } = getBackerTagConfig(backer_tag);
                 const fullName = formatFullName(first_name, last_name, middle_name);
                 const date = formatDate(created_at);
+
+                // Фильтруем только заполненные динамические поля
+                const dynamicFieldItems = dynamicFields
+                    .map(({ key, label }) => {
+                        const fieldValue = item[key];
+                        return fieldValue ? { key, content: fieldValue, label } : null;
+                    })
+                    .filter(Boolean); // Убираем пустые значения
+
+                // Разделяем динамические поля на два блока
+                const firstThreeFields = dynamicFieldItems.slice(0, 3);
+                const remainingFields = dynamicFieldItems.slice(3);
 
                 return (
                     <div className="result__box" key={id}>
@@ -75,29 +87,38 @@ const ResultItemList = ({results = []}) => {
                             <div className="result__title">{fullName}</div>
 
                             <div className="result__info">
-                                <ResultItem content={phonenumber} iconId="search__phone"/>
-                                <ResultItem content={email} iconId="search__mail"/>
-                                <ResultItem content={discord} iconId="search__mail" label="Discord:"/>
+                                <ResultItem content={phonenumber} iconId="search__phone" />
+                                <ResultItem content={email} iconId="search__mail" />
+                                <ResultItem content={discord} iconId="search__mail" label="Discord:" />
 
-                                {dynamicFields.map(({key, label}) => {
-                                    const fieldValue = item[key];
-                                    return fieldValue ? (
+                                {firstThreeFields.map(({ key, content, label }) => (
+                                    <ResultItem
+                                        key={key}
+                                        content={content}
+                                        label={label}
+                                    />
+                                ))}
+                            </div>
+
+                            {remainingFields.length > 0 && (
+                                <div className="result__info-2">
+                                    {remainingFields.map(({ key, content, label }) => (
                                         <ResultItem
                                             key={key}
-                                            content={fieldValue}
+                                            content={content}
                                             label={label}
                                         />
-                                    ) : null;
-                                })}
-                            </div>
+                                    ))}
+                                </div>
+                            )}
                         </div>
 
                         <div className="result result-right">
                             <div className="result__title">
-                                <IconSvg width={48} height={48} id={fund_name}/>
+                                <IconSvg width={48} height={48} id={fund_name} />
                                 <div>
-                                    Запись от
-                                    <br/>
+                                    запись от
+                                    <br />
                                     {date}
                                 </div>
                             </div>
