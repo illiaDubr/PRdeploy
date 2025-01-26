@@ -9,7 +9,7 @@ import Breadcrumbs from "./Breadcrumbs.jsx";
 const SectionHeader = () => {
     return (
         <div className="section__header-wrap">
-            <Breadcrumbs />
+            {/*<Breadcrumbs />
             <Resize width={801}
                     fallback={
                         <>
@@ -21,7 +21,9 @@ const SectionHeader = () => {
                             <div className="burger__menu-wrap">
                             </div>
                         </>
-                    }>
+                    }
+            >
+
                 <div className="section__header-info--wrap">
                     <div className="section__header-info">
                         Вам доступно 5 поисков
@@ -30,7 +32,9 @@ const SectionHeader = () => {
                         <IconSvg width={24} height={24} id={'arrow'}/>
                     </button>
                 </div>
+
             </Resize>
+             */}
         </div>
     )
 }

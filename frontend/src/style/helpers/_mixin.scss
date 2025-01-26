@@ -54,4 +54,15 @@
       );
     }
 
+  // borders
+
+    @mixin gradient-box($bgColor: lightcoral, $borderGradient: linear-gradient(to right, #bb2577, #3782ef)) {
+      background:
+              linear-gradient(
+                              $bgColor,
+                              $bgColor
+              ) padding-box,
+              $borderGradient border-box;
+    }
+
 // === / Mixins === //

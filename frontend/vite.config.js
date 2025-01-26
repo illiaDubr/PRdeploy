@@ -34,7 +34,6 @@ export default defineConfig({
         rollupOptions: {
             input: {
                 ...pages,
-                ...cssFiles,
             },
             output: {
                 assetFileNames: 'assets/[name].[hash][extname]',
