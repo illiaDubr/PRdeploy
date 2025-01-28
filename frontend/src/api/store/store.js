@@ -1,8 +1,9 @@
-import AuthService from "../services/AuthService.js";
 import { makeAutoObservable } from "mobx";
 import axios from "axios";
 import { API_URl } from "../http/index.js";
+import AuthService from "../services/AuthService.js";
 import SearchService from "../services/SearchService.js";
+import AddPlayerService from "../services/AddPlayerService.js";
 
 export default class Store {
     user = {}
@@ -118,6 +119,18 @@ export default class Store {
         } catch (e) {
             console.log(e);
             this.setResults([]);
+        } finally {
+            this.setLoading(false);
+        }
+    }
+
+    async addPlayer(formData) {
+        this.setLoading(true);
+        try {
+            const response = await AddPlayerService.addPlayer(formData);
+            console.log(response);
+        } catch (e) {
+            console.log(e);
         } finally {
             this.setLoading(false);
         }

@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "flag-icons/css/flag-icons.min.css";
-import IconSvg from "../../components/IconSvg.jsx";
+import IconSvg from "./IconSvg.jsx";
+
 
 
 const CountrySelect = ({ onPhoneNumberChange }) => {
@@ -60,11 +61,7 @@ const CountrySelect = ({ onPhoneNumberChange }) => {
     const toggleDropdown = () => setIsDropdownOpen((prev) => !prev);
 
     return (
-        <div className="search">
-            <label htmlFor="phoneNumber" className="search__label">
-                Номер телефона
-            </label>
-
+        <>
             <div className="select__country" ref={dropdownRef}>
                 <button
                     type="button"
@@ -115,7 +112,7 @@ const CountrySelect = ({ onPhoneNumberChange }) => {
                     aria-label="Phone number input"
                 />
             </div>
-        </div>
+        </>
     );
 };
 

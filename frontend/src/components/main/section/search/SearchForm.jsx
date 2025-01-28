@@ -4,7 +4,7 @@ import {useSearchFormData} from "../../../../utils/SearchData.js";
 import {useForm} from 'react-hook-form';
 import {yupResolver} from "@hookform/resolvers/yup";
 import {Context} from "../../../../api/store/storeContext.js";
-import CountrySelect from "./CountrySelect.jsx";
+import CountrySelect from "../../components/CountrySelect.jsx";
 import {SearchSchema} from "../../components/validation/SearchSchema.js";
 
 const SearchForm = () => {
@@ -48,11 +48,8 @@ const SearchForm = () => {
         }
 
         await store.search(formData);
-        console.log(formData);
         reset()
     }
-
-    console.log(formData);
 
     return (
         <form method="POST" className="search__wrapper" autoComplete="off" onSubmit={handleSubmit(submitForm)}>
@@ -103,7 +100,12 @@ const SearchForm = () => {
                         )}
                     </div>
                 ))}
-                <CountrySelect onPhoneNumberChange={handlePhoneNumberChange}/>
+                <div className="search">
+                    <label htmlFor="phoneNumber" className="search__label">
+                        Номер телефона
+                    </label>
+                    <CountrySelect onPhoneNumberChange={handlePhoneNumberChange}/>
+                </div>
             </div>
 
             <button type="submit" className="search__btn">
